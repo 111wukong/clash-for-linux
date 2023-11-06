@@ -31,7 +31,7 @@ $ git clone https://github.com/wanhebin/clash-for-linux.git
 进入到项目目录，编辑`.env`文件，修改变量`CLASH_URL`的值。
 
 ```bash
-$ cd clash-for-linux
+$ cd clash-for-linux-main/clash-for-linux
 $ vim .env
 ```
 
