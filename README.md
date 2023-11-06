@@ -10,7 +10,7 @@
 
 - 运行本项目建议使用root用户，或者使用 sudo 提权。
 - 在进行issues提交前，请替换提交内容中是敏感信息（例如：订阅地址）。
-- 本项目是基于 [clash](https://github.com/Dreamacro/clash) 、[yacd](https://github.com/haishanh/yacd) 进行的配置整合，关于clash、yacd的详细配置请去原项目查看。
+- 本项目是基于[yacd](https://github.com/haishanh/yacd) 进行的配置整合，关于yacd的详细配置请去原项目查看。
 - 请自行准备Clash订阅地址(收费的)。https://sockboom.online/auth/register?affid=556438
 - 运行前请手动更改`.env`文件中的`CLASH_URL`变量值，否则无法正常运行。
 - 当前在RHEL系列和Debian系列Linux系统中测试过，其他系列可能需要适当修改脚本。
