@@ -1,0 +1,1483 @@
+# HTTP 代理端口
+port: 7890 
+
+# SOCKS5 代理端口
+socks-port: 7891 
+
+# Linux 和 macOS 的 redir 代理端口
+redir-port: 7892 
+
+# 允许局域网的连接
+allow-lan: true
+
+# 规则模式：Rule（规则） / Global（全局代理）/ Direct（全局直连）
+mode: rule
+
+# 设置日志输出级别 (默认级别：silent，即不输出任何内容，以避免因日志内容过大而导致程序内存溢出）。
+# 5 个级别：silent / info / warning / error / debug。级别越高日志输出量越大，越倾向于调试，若需要请自行开启。
+log-level: silent
+# Clash 的 RESTful API
+external-controller: '0.0.0.0:9090'
+
+# RESTful API 的口令
+secret: 'b&ZlKTte5OnEt2Sn'
+
+# 您可以将静态网页资源（如 clash-dashboard）放置在一个目录中，clash 将会服务于 `RESTful API/ui`
+# 参数应填写配置目录的相对路径或绝对路径。
+# external-ui: /code/clash-dashboard
+
+proxies:
+  - {name: 【A】台湾  VIP 1 - 中华电信, server: n04.boom.skin, port: 18000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】台湾  VIP 2 - 云高, server: n119.boom.skin, port: 17000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】台湾  VIP 3 - 中华电信, server: s100.boom.skin, port: 19000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港  VIP 1 - Nearoute, server: n21.boom.skin, port: 15000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港  VIP 3 - Nearoute, server: n23.boom.skin, port: 11000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港  VIP 5 - Leaseweb, server: n24.boom.skin, port: 12000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港  VIP 6 - Leaseweb, server: n28.boom.skin, port: 13000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港  VIP 8 - Nearoute, server: n54.boom.skin, port: 14000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港 VIP 7 - Nearoute, server: n32.boom.skin, port: 16000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港 普通 1 - Nearoute, server: ntemp15.boom.skin, port: 19000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港 普通 A - Nearoute, server: ntemp10.boom.skin, port: 20000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港 普通 B - Nearoute, server: ntemp16.boom.skin, port: 21000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港 普通 C - Nearoute, server: ntemp17.boom.skin, port: 22000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港 普通 D - Nearoute, server: ntemp18.boom.skin, port: 23000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港 普通 E - Nearoute, server: ntemp19.boom.skin, port: 24000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【A】香港 普通 F - Nearoute, server: ntemp20.boom.skin, port: 25000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港  VIP C - Nearoute, server: n43.boom.skin, port: 24000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港  VIP F - Nearoute, server: n57.boom.skin, port: 25000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港  普通 3 - Nearoute, server: n62.boom.skin, port: 20000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港 普通 1 - Leaseweb, server: n06.boom.skin, port: 21000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港 普通 1 - Nearoute, server: ntemp01.boom.skin, port: 10000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港 普通 2 - Nearoute, server: ntemp02.boom.skin, port: 11000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港 普通 3 - Nearoute, server: ntemp03.boom.skin, port: 12000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港 普通 4 -  Nearoute, server: ntemp04.boom.skin, port: 13000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港 普通 5 - Nearoute, server: ntemp05.boom.skin, port: 14000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港 普通 6 - Nearoute, server: ntemp06.boom.skin, port: 15000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港 普通 7 - Nearoute, server: ntemp07.boom.skin, port: 16000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港 普通 8 - Nearoute, server: ntemp08.boom.skin, port: 17000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【B】香港 普通 9 - Nearoute, server: ntemp09.boom.skin, port: 18000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】日本 VIP W - Leaseweb, server: n22.boom.skin, port: 32200, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】日本 VIP Y - Leaseweb, server: n116.boom.skin, port: 33200, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】狮城  VIP 6 - 阿里云, server: n48.boom.skin, port: 36000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】狮城  VIP 7 - DO, server: n47.boom.skin, port: 31100, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】狮城 VIP C - 阿里云, server: n05.boom.skin, port: 30001, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】美国 VIP 1 - Netflix, server: us5.edge.boom.skin, port: 44001, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】美国 VIP 2 - Netflix, server: us6.edge.boom.skin, port: 45000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】美国 VIP 3 - Netflix, server: us7.edge.boom.skin, port: 46000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】美国 VIP 4 - CC, server: us8.edge.boom.skin, port: 47000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】美国 VIP 5 - CC, server: us9.edge.boom.skin, port: 48000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】美国 VIP 6 - CC, server: us10.edge.boom.skin, port: 49001, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】美国 普通 1 - CC, server: us1.edge.boom.skin, port: 40000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】美国 普通 2 - CC, server: us2.edge.boom.skin, port: 41000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】美国 普通 3 - CC, server: us3.edge.boom.skin, port: 42001, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】美国 普通 4 - CC, server: us4.edge.boom.skin, port: 43000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【C】香港  VIP 9 - Nearoute, server: n37.boom.skin, port: 33300, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【E】俄罗斯  VIP 1 - RT, server: s102.boom.skin, port: 20000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【E】俄罗斯  VIP 2 - RT, server: s103.boom.skin, port: 21000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【E】俄罗斯  VIP 3 - RT, server: s104.boom.skin, port: 22000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【E】俄罗斯  VIP 4 - RT, server: s105.boom.skin, port: 23000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【F】土耳其 VIP 1 - Steam, server: s01.boom.skin, port: 37000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【F】新加坡  VIP 1 - Linode, server: n17.boom.skin, port: 25000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【F】新加坡  VIP 8 - Linode, server: n96.boom.skin, port: 18000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【F】新加坡  VIP 9 - Linode, server: n30.boom.skin, port: 19000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【F】新加坡  VIP A - Linode, server: n11.boom.skin, port: 20000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【F】新加坡 VIP B - DO, server: n110.boom.skin, port: 22000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【F】韩国  VIP 2 - VPC, server: n13.boom.skin, port: 21000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【GAME】香港  VIP 2 - HGC, server: n09.boom.skin, port: 12000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【GAME】香港  VIP 3 - HGC, server: n27.boom.skin, port: 13000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【GAME】香港  VIP 4 - HGC, server: n63.boom.skin, port: 14000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【GAME】香港  VIP 6 - HGC, server: n92.boom.skin, port: 16000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【GAME】香港  VIP 8 - HGC, server: n77.boom.skin, port: 23000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【GAME】香港  VIP 9 - HGC, server: n60.boom.skin, port: 24000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【GAME】香港 VIP 1 - HGC, server: ntemp25.boom.skin, port: 11000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【GAME】香港 VIP 5 - HGC, server: n100.boom.skin, port: 15000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【GAME】香港 VIP 7 - HGC, server: n114.boom.skin, port: 17000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【IEPL】香港 普通 1 - Nearoute, server: nk1.boom.skin, port: 11000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【IEPL】香港 普通 2 - Nearoute, server: nk2.boom.skin, port: 12000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【IEPL】香港 普通 3 - Nearoute, server: nk3.boom.skin, port: 13000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【IEPL】香港 普通 4 - Nearoute, server: nk4.boom.skin, port: 14000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【IEPL】香港 普通 5 - Nearoute, server: nk5.boom.skin, port: 15000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【IEPL】香港 普通 6 - Nearoute, server: nk6.boom.skin, port: 16000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【IEPL】香港 普通 7 - Nearoute, server: nk7.boom.skin, port: 17000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP 1 - chatGPT, server: nf1.boom.skin, port: 11000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP 2 - chatGPT, server: nf2.boom.skin, port: 12000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP 3 - chatGPT, server: nf3.boom.skin, port: 13000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP 4 - chatGPT, server: nf4.boom.skin, port: 14000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP 5 - chatGPT, server: nf5.boom.skin, port: 15000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP 6 - chatGPT, server: nf6.boom.skin, port: 16000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP 7 - chatGPT, server: nf7.boom.skin, port: 17000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP 8 - chatGPT, server: nf8.boom.skin, port: 18000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP 9 - chatGPT, server: nf9.boom.skin, port: 19000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP A - chatGPT, server: nf10.boom.skin, port: 20000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】日本 VIP B - chatGPT, server: nf11.boom.skin, port: 21000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【I】蒙古 普通 A - MN, server: n170.boom.skin, port: 33000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP 1 - Netflix, server: nj1.boom.skin, port: 11000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP 2 - Netflix, server: nj2.boom.skin, port: 12000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP 3 - Netflix, server: nj3.boom.skin, port: 13000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP 4 - Netflix, server: nj4.boom.skin, port: 14000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP 5 - Netflix, server: nj5.boom.skin, port: 15000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP 6 - Netflix, server: nj6.boom.skin, port: 16000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP 7 - Netflix, server: nj7.boom.skin, port: 17000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP 8 - Netflix, server: nj8.boom.skin, port: 18000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP 9 - Netflix, server: nj9.boom.skin, port: 19000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP A - Netflix, server: nja.boom.skin, port: 20000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP B - Netflix, server: njb.boom.skin, port: 21000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP C - Netflix, server: njc.boom.skin, port: 22000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP D - Netflix, server: njd.boom.skin, port: 23000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【J】香港 VIP E - Netflix, server: nje.boom.skin, port: 24000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【K】新加坡 普通 1 - DO, server: nk8.boom.skin, port: 18000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【K】新加坡 普通 2 - DO, server: nk9.boom.skin, port: 19000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【K】新加坡 普通 3 - DO, server: nka.boom.skin, port: 20000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【K】新加坡 普通 4 - DO, server: nkb.boom.skin, port: 21000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【K】新加坡 普通 5 - DO, server: nkc.boom.skin, port: 22000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【K】新加坡 普通 6 - DO, server: nkd.boom.skin, port: 23000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【K】新加坡 普通 7 - DO, server: nke.boom.skin, port: 24000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】新加坡  VIP1 - chatGPT, server: nl1.boom.skin, port: 22000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】新加坡  VIP2 - chatGPT, server: nl2.boom.skin, port: 23000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】新加坡  VIP3 - chatGPT, server: nl3.boom.skin, port: 24000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】新加坡  VIP4 - chatGPT, server: nl4.boom.skin, port: 25000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】新加坡  VIP5 - chatGPT, server: nl5.boom.skin, port: 26000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】新加坡  VIP6 - chatGPT, server: nl6.boom.skin, port: 27000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】新加坡  VIP7 - chatGPT, server: nl7.boom.skin, port: 28000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】新加坡  VIP8 - chatGPT, server: nl8.boom.skin, port: 29000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】新加坡  VIP9 - chatGPT, server: nl9.boom.skin, port: 30000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】新加坡  VIPA - chatGPT, server: nla.boom.skin, port: 31000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【L】马来西亚  VIP 1 - TMNet, server: s101.boom.skin, port: 32000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港  VIP F - Leaseweb, server: n61.boom.skin, port: 24000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港  VIP H - Leaseweb, server: n67.boom.skin, port: 25000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港  VIP I - chatGPT, server: n74.boom.skin, port: 26000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP 1 - Netflix, server: nm1.boom.skin, port: 11000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP 2 - Netflix, server: nm2.boom.skin, port: 12000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP 3 - Netflix, server: nm3.boom.skin, port: 13000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP 4 - Netflix, server: nm4.boom.skin, port: 14000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP 5 - Netflix, server: nm5.boom.skin, port: 15000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP 6 - Netflix, server: nm6.boom.skin, port: 16000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP 7 - Netflix, server: nm7.boom.skin, port: 17000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP 8 - Leaseweb, server: nm8.boom.skin, port: 18000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP 9 - Leaseweb, server: nm9.boom.skin, port: 19000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP A - Leaseweb, server: nma.boom.skin, port: 20000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP B - Leaseweb, server: nmb.boom.skin, port: 21000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP C - Leaseweb, server: nmc.boom.skin, port: 22000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP D - chatGPT, server: nmd.boom.skin, port: 23000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP K - chatGPT, server: n93.boom.skin, port: 28000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP T - Leaseweb, server: n111.boom.skin, port: 29000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP X - Leaseweb, server: n115.boom.skin, port: 30000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【M】香港 VIP Z - Leaseweb, server: n117.boom.skin, port: 31000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 1 - Nerocloud, server: jp6.boom.skin, port: 35000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 10 - Nerocloud, server: jp15.boom.skin, port: 39500, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 11 - Nerocloud, server: jp16.boom.skin, port: 39600, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 12 - Nerocloud, server: jp17.boom.skin, port: 39700, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 13 - Nerocloud, server: jp18.boom.skin, port: 39800, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 14 - Nerocloud, server: jp19.boom.skin, port: 39900, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 15 - Nerocloud, server: jp20.boom.skin, port: 38100, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 2 - Nerocloud, server: jp7.boom.skin, port: 36000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 3 - Nerocloud, server: jp8.boom.skin, port: 37000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 4 - Nerocloud, server: jp9.boom.skin, port: 38000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 5 - Nerocloud, server: jp10.boom.skin, port: 39000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 6 - Nerocloud, server: jp11.boom.skin, port: 39100, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 7 - Nerocloud, server: jp12.boom.skin, port: 39200, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 8 - Nerocloud, server: jp13.boom.skin, port: 39300, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP 9 - Nerocloud, server: jp14.boom.skin, port: 39400, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP A - Leaseweb, server: nn1.boom.skin, port: 40000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP B - Leaseweb, server: nn2.boom.skin, port: 41000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP C - Leaseweb, server: nn3.boom.skin, port: 42000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP D - Leaseweb, server: nn4.boom.skin, port: 43000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP E - Leaseweb, server: nn5.boom.skin, port: 44000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP F - Leaseweb, server: nn6.boom.skin, port: 45000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 VIP G - Leaseweb, server: nn7.boom.skin, port: 46000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 普通 1 - Nerocloud, server: jp1.boom.skin, port: 30000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 普通 2 - Nerocloud, server: jp2.boom.skin, port: 31000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 普通 3 - Nerocloud, server: jp3.boom.skin, port: 32000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 普通 4 - Nerocloud, server: jp4.boom.skin, port: 33000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】日本 普通 5 - Nerocloud, server: jp5.boom.skin, port: 34000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】香港 VIP 10 - Leaseweb, server: nn14.boom.skin, port: 53000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】香港 VIP 8 - Leaseweb, server: nn12.boom.skin, port: 51000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】香港 VIP 9 - Nearoute, server: nn13.boom.skin, port: 52000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】香港 普通 1 - Nearoute, server: nn8.boom.skin, port: 47000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】香港 普通 2 - Nearoute, server: nn9.boom.skin, port: 48000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】香港 普通 3 - Nearoute, server: nna.boom.skin, port: 49000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【N】香港 普通 4 - Leaseweb, server: nn11.boom.skin, port: 50000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 1 - Leaseweb, server: opt6.boom.skin, port: 16000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 10 - Leaseweb, server: opt15.boom.skin, port: 25000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 11 - Leaseweb, server: opt21.boom.skin, port: 31000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 12 - Leaseweb, server: opt22.boom.skin, port: 32000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 13 - Leaseweb, server: opt23.boom.skin, port: 33000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 14 - Leaseweb, server: opt24.boom.skin, port: 34000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 15 - Leaseweb, server: opt25.boom.skin, port: 35000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 16 - Leaseweb, server: opt26.boom.skin, port: 36000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 2 - Leaseweb, server: opt7.boom.skin, port: 17000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 3 - Leaseweb, server: opt8.boom.skin, port: 18000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 4 - Leaseweb, server: opt9.boom.skin, port: 19000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 5 - Leaseweb, server: opt10.boom.skin, port: 20000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 6 - Leaseweb, server: opt11.boom.skin, port: 21000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 7 - Leaseweb, server: opt12.boom.skin, port: 22000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 8 - Leaseweb, server: opt13.boom.skin, port: 23000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 VIP 9 - Leaseweb, server: opt14.boom.skin, port: 24000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 普通 1 - Leaseweb, server: opt1.boom.skin, port: 11000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 普通 10 - Leaseweb, server: opt20.boom.skin, port: 30000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 普通 2 - Leaseweb, server: opt2.boom.skin, port: 12000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 普通 3 - Leaseweb, server: opt3.boom.skin, port: 13000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 普通 4 - Leaseweb, server: opt4.boom.skin, port: 14000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 普通 5 - Leaseweb, server: opt5.boom.skin, port: 15000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 普通 6 - Leaseweb, server: opt16.boom.skin, port: 26000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 普通 7 - Leaseweb, server: opt17.boom.skin, port: 27000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 普通 8 - Leaseweb, server: opt18.boom.skin, port: 28000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 【O】香港 普通 9 - Leaseweb, server: opt19.boom.skin, port: 29000, type: ssr, cipher: aes-256-cfb, password: Uk92CS, protocol: auth_aes128_sha1, obfs: http_simple, protocol-param: 556438:ELZB5w, obfs-param: download.windowsupdate.com, udp: true}
+  - {name: 新网址：sockboom.link, server: www.google.com, port: 1, type: ssr, cipher: aes-256-cfb, password: breakwall, protocol: auth_chain_a, obfs: tls1.2_ticket_auth, protocol-param: "", obfs-param: "", udp: true}
+proxy-groups:
+  - name: 手动选择
+    type: select
+    proxies:
+      - 【A】台湾  VIP 1 - 中华电信
+      - 【A】台湾  VIP 2 - 云高
+      - 【A】台湾  VIP 3 - 中华电信
+      - 【A】香港  VIP 1 - Nearoute
+      - 【A】香港  VIP 3 - Nearoute
+      - 【A】香港  VIP 5 - Leaseweb
+      - 【A】香港  VIP 6 - Leaseweb
+      - 【A】香港  VIP 8 - Nearoute
+      - 【A】香港 VIP 7 - Nearoute
+      - 【A】香港 普通 1 - Nearoute
+      - 【A】香港 普通 A - Nearoute
+      - 【A】香港 普通 B - Nearoute
+      - 【A】香港 普通 C - Nearoute
+      - 【A】香港 普通 D - Nearoute
+      - 【A】香港 普通 E - Nearoute
+      - 【A】香港 普通 F - Nearoute
+      - 【B】香港  VIP C - Nearoute
+      - 【B】香港  VIP F - Nearoute
+      - 【B】香港  普通 3 - Nearoute
+      - 【B】香港 普通 1 - Leaseweb
+      - 【B】香港 普通 1 - Nearoute
+      - 【B】香港 普通 2 - Nearoute
+      - 【B】香港 普通 3 - Nearoute
+      - 【B】香港 普通 4 -  Nearoute
+      - 【B】香港 普通 5 - Nearoute
+      - 【B】香港 普通 6 - Nearoute
+      - 【B】香港 普通 7 - Nearoute
+      - 【B】香港 普通 8 - Nearoute
+      - 【B】香港 普通 9 - Nearoute
+      - 【C】日本 VIP W - Leaseweb
+      - 【C】日本 VIP Y - Leaseweb
+      - 【C】狮城  VIP 6 - 阿里云
+      - 【C】狮城  VIP 7 - DO
+      - 【C】狮城 VIP C - 阿里云
+      - 【C】美国 VIP 1 - Netflix
+      - 【C】美国 VIP 2 - Netflix
+      - 【C】美国 VIP 3 - Netflix
+      - 【C】美国 VIP 4 - CC
+      - 【C】美国 VIP 5 - CC
+      - 【C】美国 VIP 6 - CC
+      - 【C】美国 普通 1 - CC
+      - 【C】美国 普通 2 - CC
+      - 【C】美国 普通 3 - CC
+      - 【C】美国 普通 4 - CC
+      - 【C】香港  VIP 9 - Nearoute
+      - 【E】俄罗斯  VIP 1 - RT
+      - 【E】俄罗斯  VIP 2 - RT
+      - 【E】俄罗斯  VIP 3 - RT
+      - 【E】俄罗斯  VIP 4 - RT
+      - 【F】土耳其 VIP 1 - Steam
+      - 【F】新加坡  VIP 1 - Linode
+      - 【F】新加坡  VIP 8 - Linode
+      - 【F】新加坡  VIP 9 - Linode
+      - 【F】新加坡  VIP A - Linode
+      - 【F】新加坡 VIP B - DO
+      - 【F】韩国  VIP 2 - VPC
+      - 【GAME】香港  VIP 2 - HGC
+      - 【GAME】香港  VIP 3 - HGC
+      - 【GAME】香港  VIP 4 - HGC
+      - 【GAME】香港  VIP 6 - HGC
+      - 【GAME】香港  VIP 8 - HGC
+      - 【GAME】香港  VIP 9 - HGC
+      - 【GAME】香港 VIP 1 - HGC
+      - 【GAME】香港 VIP 5 - HGC
+      - 【GAME】香港 VIP 7 - HGC
+      - 【IEPL】香港 普通 1 - Nearoute
+      - 【IEPL】香港 普通 2 - Nearoute
+      - 【IEPL】香港 普通 3 - Nearoute
+      - 【IEPL】香港 普通 4 - Nearoute
+      - 【IEPL】香港 普通 5 - Nearoute
+      - 【IEPL】香港 普通 6 - Nearoute
+      - 【IEPL】香港 普通 7 - Nearoute
+      - 【I】日本 VIP 1 - chatGPT
+      - 【I】日本 VIP 2 - chatGPT
+      - 【I】日本 VIP 3 - chatGPT
+      - 【I】日本 VIP 4 - chatGPT
+      - 【I】日本 VIP 5 - chatGPT
+      - 【I】日本 VIP 6 - chatGPT
+      - 【I】日本 VIP 7 - chatGPT
+      - 【I】日本 VIP 8 - chatGPT
+      - 【I】日本 VIP 9 - chatGPT
+      - 【I】日本 VIP A - chatGPT
+      - 【I】日本 VIP B - chatGPT
+      - 【I】蒙古 普通 A - MN
+      - 【J】香港 VIP 1 - Netflix
+      - 【J】香港 VIP 2 - Netflix
+      - 【J】香港 VIP 3 - Netflix
+      - 【J】香港 VIP 4 - Netflix
+      - 【J】香港 VIP 5 - Netflix
+      - 【J】香港 VIP 6 - Netflix
+      - 【J】香港 VIP 7 - Netflix
+      - 【J】香港 VIP 8 - Netflix
+      - 【J】香港 VIP 9 - Netflix
+      - 【J】香港 VIP A - Netflix
+      - 【J】香港 VIP B - Netflix
+      - 【J】香港 VIP C - Netflix
+      - 【J】香港 VIP D - Netflix
+      - 【J】香港 VIP E - Netflix
+      - 【K】新加坡 普通 1 - DO
+      - 【K】新加坡 普通 2 - DO
+      - 【K】新加坡 普通 3 - DO
+      - 【K】新加坡 普通 4 - DO
+      - 【K】新加坡 普通 5 - DO
+      - 【K】新加坡 普通 6 - DO
+      - 【K】新加坡 普通 7 - DO
+      - 【L】新加坡  VIP1 - chatGPT
+      - 【L】新加坡  VIP2 - chatGPT
+      - 【L】新加坡  VIP3 - chatGPT
+      - 【L】新加坡  VIP4 - chatGPT
+      - 【L】新加坡  VIP5 - chatGPT
+      - 【L】新加坡  VIP6 - chatGPT
+      - 【L】新加坡  VIP7 - chatGPT
+      - 【L】新加坡  VIP8 - chatGPT
+      - 【L】新加坡  VIP9 - chatGPT
+      - 【L】新加坡  VIPA - chatGPT
+      - 【L】马来西亚  VIP 1 - TMNet
+      - 【M】香港  VIP F - Leaseweb
+      - 【M】香港  VIP H - Leaseweb
+      - 【M】香港  VIP I - chatGPT
+      - 【M】香港 VIP 1 - Netflix
+      - 【M】香港 VIP 2 - Netflix
+      - 【M】香港 VIP 3 - Netflix
+      - 【M】香港 VIP 4 - Netflix
+      - 【M】香港 VIP 5 - Netflix
+      - 【M】香港 VIP 6 - Netflix
+      - 【M】香港 VIP 7 - Netflix
+      - 【M】香港 VIP 8 - Leaseweb
+      - 【M】香港 VIP 9 - Leaseweb
+      - 【M】香港 VIP A - Leaseweb
+      - 【M】香港 VIP B - Leaseweb
+      - 【M】香港 VIP C - Leaseweb
+      - 【M】香港 VIP D - chatGPT
+      - 【M】香港 VIP K - chatGPT
+      - 【M】香港 VIP T - Leaseweb
+      - 【M】香港 VIP X - Leaseweb
+      - 【M】香港 VIP Z - Leaseweb
+      - 【N】日本 VIP 1 - Nerocloud
+      - 【N】日本 VIP 10 - Nerocloud
+      - 【N】日本 VIP 11 - Nerocloud
+      - 【N】日本 VIP 12 - Nerocloud
+      - 【N】日本 VIP 13 - Nerocloud
+      - 【N】日本 VIP 14 - Nerocloud
+      - 【N】日本 VIP 15 - Nerocloud
+      - 【N】日本 VIP 2 - Nerocloud
+      - 【N】日本 VIP 3 - Nerocloud
+      - 【N】日本 VIP 4 - Nerocloud
+      - 【N】日本 VIP 5 - Nerocloud
+      - 【N】日本 VIP 6 - Nerocloud
+      - 【N】日本 VIP 7 - Nerocloud
+      - 【N】日本 VIP 8 - Nerocloud
+      - 【N】日本 VIP 9 - Nerocloud
+      - 【N】日本 VIP A - Leaseweb
+      - 【N】日本 VIP B - Leaseweb
+      - 【N】日本 VIP C - Leaseweb
+      - 【N】日本 VIP D - Leaseweb
+      - 【N】日本 VIP E - Leaseweb
+      - 【N】日本 VIP F - Leaseweb
+      - 【N】日本 VIP G - Leaseweb
+      - 【N】日本 普通 1 - Nerocloud
+      - 【N】日本 普通 2 - Nerocloud
+      - 【N】日本 普通 3 - Nerocloud
+      - 【N】日本 普通 4 - Nerocloud
+      - 【N】日本 普通 5 - Nerocloud
+      - 【N】香港 VIP 10 - Leaseweb
+      - 【N】香港 VIP 8 - Leaseweb
+      - 【N】香港 VIP 9 - Nearoute
+      - 【N】香港 普通 1 - Nearoute
+      - 【N】香港 普通 2 - Nearoute
+      - 【N】香港 普通 3 - Nearoute
+      - 【N】香港 普通 4 - Leaseweb
+      - 【O】香港 VIP 1 - Leaseweb
+      - 【O】香港 VIP 10 - Leaseweb
+      - 【O】香港 VIP 11 - Leaseweb
+      - 【O】香港 VIP 12 - Leaseweb
+      - 【O】香港 VIP 13 - Leaseweb
+      - 【O】香港 VIP 14 - Leaseweb
+      - 【O】香港 VIP 15 - Leaseweb
+      - 【O】香港 VIP 16 - Leaseweb
+      - 【O】香港 VIP 2 - Leaseweb
+      - 【O】香港 VIP 3 - Leaseweb
+      - 【O】香港 VIP 4 - Leaseweb
+      - 【O】香港 VIP 5 - Leaseweb
+      - 【O】香港 VIP 6 - Leaseweb
+      - 【O】香港 VIP 7 - Leaseweb
+      - 【O】香港 VIP 8 - Leaseweb
+      - 【O】香港 VIP 9 - Leaseweb
+      - 【O】香港 普通 1 - Leaseweb
+      - 【O】香港 普通 10 - Leaseweb
+      - 【O】香港 普通 2 - Leaseweb
+      - 【O】香港 普通 3 - Leaseweb
+      - 【O】香港 普通 4 - Leaseweb
+      - 【O】香港 普通 5 - Leaseweb
+      - 【O】香港 普通 6 - Leaseweb
+      - 【O】香港 普通 7 - Leaseweb
+      - 【O】香港 普通 8 - Leaseweb
+      - 【O】香港 普通 9 - Leaseweb
+      - 新网址：sockboom.link
+  - name: 节点选择
+    type: select
+    proxies:
+      - 手动选择
+      - 自动选择
+      - 故障切换
+      - DIRECT
+  - name: 国外网站
+    type: select
+    proxies:
+      - 节点选择
+      - DIRECT
+      - 自动选择
+      - 故障切换
+  - name: 电报吹水
+    type: select
+    proxies:
+      - 【F】新加坡  VIP 1 - Linode
+      - 【F】新加坡  VIP 8 - Linode
+      - 【F】新加坡  VIP 9 - Linode
+      - 【F】新加坡  VIP A - Linode
+      - 【F】新加坡 VIP B - DO
+      - 【K】新加坡 普通 1 - DO
+      - 【K】新加坡 普通 2 - DO
+      - 【K】新加坡 普通 3 - DO
+      - 【K】新加坡 普通 4 - DO
+      - 【K】新加坡 普通 5 - DO
+      - 【K】新加坡 普通 6 - DO
+      - 【K】新加坡 普通 7 - DO
+      - 【L】新加坡  VIP1 - chatGPT
+      - 【L】新加坡  VIP2 - chatGPT
+      - 【L】新加坡  VIP3 - chatGPT
+      - 【L】新加坡  VIP4 - chatGPT
+      - 【L】新加坡  VIP5 - chatGPT
+      - 【L】新加坡  VIP6 - chatGPT
+      - 【L】新加坡  VIP7 - chatGPT
+      - 【L】新加坡  VIP8 - chatGPT
+      - 【L】新加坡  VIP9 - chatGPT
+      - 【L】新加坡  VIPA - chatGPT
+      - 节点选择
+      - 自动选择
+      - 故障切换
+      - DIRECT
+  - name: 动画疯
+    type: select
+    proxies:
+      - 【A】台湾  VIP 1 - 中华电信
+      - 【A】台湾  VIP 2 - 云高
+      - 【A】台湾  VIP 3 - 中华电信
+      - 节点选择
+      - 自动选择
+      - 故障切换
+      - DIRECT
+  - name: 自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 500
+    proxies:
+      - 【A】台湾  VIP 1 - 中华电信
+      - 【A】台湾  VIP 2 - 云高
+      - 【A】台湾  VIP 3 - 中华电信
+      - 【A】香港  VIP 1 - Nearoute
+      - 【A】香港  VIP 3 - Nearoute
+      - 【A】香港  VIP 5 - Leaseweb
+      - 【A】香港  VIP 6 - Leaseweb
+      - 【A】香港  VIP 8 - Nearoute
+      - 【A】香港 VIP 7 - Nearoute
+      - 【A】香港 普通 1 - Nearoute
+      - 【A】香港 普通 A - Nearoute
+      - 【A】香港 普通 B - Nearoute
+      - 【A】香港 普通 C - Nearoute
+      - 【A】香港 普通 D - Nearoute
+      - 【A】香港 普通 E - Nearoute
+      - 【A】香港 普通 F - Nearoute
+      - 【B】香港  VIP C - Nearoute
+      - 【B】香港  VIP F - Nearoute
+      - 【B】香港  普通 3 - Nearoute
+      - 【B】香港 普通 1 - Leaseweb
+      - 【B】香港 普通 1 - Nearoute
+      - 【B】香港 普通 2 - Nearoute
+      - 【B】香港 普通 3 - Nearoute
+      - 【B】香港 普通 4 -  Nearoute
+      - 【B】香港 普通 5 - Nearoute
+      - 【B】香港 普通 6 - Nearoute
+      - 【B】香港 普通 7 - Nearoute
+      - 【B】香港 普通 8 - Nearoute
+      - 【B】香港 普通 9 - Nearoute
+      - 【C】日本 VIP W - Leaseweb
+      - 【C】日本 VIP Y - Leaseweb
+      - 【C】狮城  VIP 6 - 阿里云
+      - 【C】狮城  VIP 7 - DO
+      - 【C】狮城 VIP C - 阿里云
+      - 【C】美国 VIP 1 - Netflix
+      - 【C】美国 VIP 2 - Netflix
+      - 【C】美国 VIP 3 - Netflix
+      - 【C】美国 VIP 4 - CC
+      - 【C】美国 VIP 5 - CC
+      - 【C】美国 VIP 6 - CC
+      - 【C】美国 普通 1 - CC
+      - 【C】美国 普通 2 - CC
+      - 【C】美国 普通 3 - CC
+      - 【C】美国 普通 4 - CC
+      - 【C】香港  VIP 9 - Nearoute
+      - 【E】俄罗斯  VIP 1 - RT
+      - 【E】俄罗斯  VIP 2 - RT
+      - 【E】俄罗斯  VIP 3 - RT
+      - 【E】俄罗斯  VIP 4 - RT
+      - 【F】土耳其 VIP 1 - Steam
+      - 【F】新加坡  VIP 1 - Linode
+      - 【F】新加坡  VIP 8 - Linode
+      - 【F】新加坡  VIP 9 - Linode
+      - 【F】新加坡  VIP A - Linode
+      - 【F】新加坡 VIP B - DO
+      - 【F】韩国  VIP 2 - VPC
+      - 【GAME】香港  VIP 2 - HGC
+      - 【GAME】香港  VIP 3 - HGC
+      - 【GAME】香港  VIP 4 - HGC
+      - 【GAME】香港  VIP 6 - HGC
+      - 【GAME】香港  VIP 8 - HGC
+      - 【GAME】香港  VIP 9 - HGC
+      - 【GAME】香港 VIP 1 - HGC
+      - 【GAME】香港 VIP 5 - HGC
+      - 【GAME】香港 VIP 7 - HGC
+      - 【IEPL】香港 普通 1 - Nearoute
+      - 【IEPL】香港 普通 2 - Nearoute
+      - 【IEPL】香港 普通 3 - Nearoute
+      - 【IEPL】香港 普通 4 - Nearoute
+      - 【IEPL】香港 普通 5 - Nearoute
+      - 【IEPL】香港 普通 6 - Nearoute
+      - 【IEPL】香港 普通 7 - Nearoute
+      - 【I】日本 VIP 1 - chatGPT
+      - 【I】日本 VIP 2 - chatGPT
+      - 【I】日本 VIP 3 - chatGPT
+      - 【I】日本 VIP 4 - chatGPT
+      - 【I】日本 VIP 5 - chatGPT
+      - 【I】日本 VIP 6 - chatGPT
+      - 【I】日本 VIP 7 - chatGPT
+      - 【I】日本 VIP 8 - chatGPT
+      - 【I】日本 VIP 9 - chatGPT
+      - 【I】日本 VIP A - chatGPT
+      - 【I】日本 VIP B - chatGPT
+      - 【I】蒙古 普通 A - MN
+      - 【J】香港 VIP 1 - Netflix
+      - 【J】香港 VIP 2 - Netflix
+      - 【J】香港 VIP 3 - Netflix
+      - 【J】香港 VIP 4 - Netflix
+      - 【J】香港 VIP 5 - Netflix
+      - 【J】香港 VIP 6 - Netflix
+      - 【J】香港 VIP 7 - Netflix
+      - 【J】香港 VIP 8 - Netflix
+      - 【J】香港 VIP 9 - Netflix
+      - 【J】香港 VIP A - Netflix
+      - 【J】香港 VIP B - Netflix
+      - 【J】香港 VIP C - Netflix
+      - 【J】香港 VIP D - Netflix
+      - 【J】香港 VIP E - Netflix
+      - 【K】新加坡 普通 1 - DO
+      - 【K】新加坡 普通 2 - DO
+      - 【K】新加坡 普通 3 - DO
+      - 【K】新加坡 普通 4 - DO
+      - 【K】新加坡 普通 5 - DO
+      - 【K】新加坡 普通 6 - DO
+      - 【K】新加坡 普通 7 - DO
+      - 【L】新加坡  VIP1 - chatGPT
+      - 【L】新加坡  VIP2 - chatGPT
+      - 【L】新加坡  VIP3 - chatGPT
+      - 【L】新加坡  VIP4 - chatGPT
+      - 【L】新加坡  VIP5 - chatGPT
+      - 【L】新加坡  VIP6 - chatGPT
+      - 【L】新加坡  VIP7 - chatGPT
+      - 【L】新加坡  VIP8 - chatGPT
+      - 【L】新加坡  VIP9 - chatGPT
+      - 【L】新加坡  VIPA - chatGPT
+      - 【L】马来西亚  VIP 1 - TMNet
+      - 【M】香港  VIP F - Leaseweb
+      - 【M】香港  VIP H - Leaseweb
+      - 【M】香港  VIP I - chatGPT
+      - 【M】香港 VIP 1 - Netflix
+      - 【M】香港 VIP 2 - Netflix
+      - 【M】香港 VIP 3 - Netflix
+      - 【M】香港 VIP 4 - Netflix
+      - 【M】香港 VIP 5 - Netflix
+      - 【M】香港 VIP 6 - Netflix
+      - 【M】香港 VIP 7 - Netflix
+      - 【M】香港 VIP 8 - Leaseweb
+      - 【M】香港 VIP 9 - Leaseweb
+      - 【M】香港 VIP A - Leaseweb
+      - 【M】香港 VIP B - Leaseweb
+      - 【M】香港 VIP C - Leaseweb
+      - 【M】香港 VIP D - chatGPT
+      - 【M】香港 VIP K - chatGPT
+      - 【M】香港 VIP T - Leaseweb
+      - 【M】香港 VIP X - Leaseweb
+      - 【M】香港 VIP Z - Leaseweb
+      - 【N】日本 VIP 1 - Nerocloud
+      - 【N】日本 VIP 10 - Nerocloud
+      - 【N】日本 VIP 11 - Nerocloud
+      - 【N】日本 VIP 12 - Nerocloud
+      - 【N】日本 VIP 13 - Nerocloud
+      - 【N】日本 VIP 14 - Nerocloud
+      - 【N】日本 VIP 15 - Nerocloud
+      - 【N】日本 VIP 2 - Nerocloud
+      - 【N】日本 VIP 3 - Nerocloud
+      - 【N】日本 VIP 4 - Nerocloud
+      - 【N】日本 VIP 5 - Nerocloud
+      - 【N】日本 VIP 6 - Nerocloud
+      - 【N】日本 VIP 7 - Nerocloud
+      - 【N】日本 VIP 8 - Nerocloud
+      - 【N】日本 VIP 9 - Nerocloud
+      - 【N】日本 VIP A - Leaseweb
+      - 【N】日本 VIP B - Leaseweb
+      - 【N】日本 VIP C - Leaseweb
+      - 【N】日本 VIP D - Leaseweb
+      - 【N】日本 VIP E - Leaseweb
+      - 【N】日本 VIP F - Leaseweb
+      - 【N】日本 VIP G - Leaseweb
+      - 【N】日本 普通 1 - Nerocloud
+      - 【N】日本 普通 2 - Nerocloud
+      - 【N】日本 普通 3 - Nerocloud
+      - 【N】日本 普通 4 - Nerocloud
+      - 【N】日本 普通 5 - Nerocloud
+      - 【N】香港 VIP 10 - Leaseweb
+      - 【N】香港 VIP 8 - Leaseweb
+      - 【N】香港 VIP 9 - Nearoute
+      - 【N】香港 普通 1 - Nearoute
+      - 【N】香港 普通 2 - Nearoute
+      - 【N】香港 普通 3 - Nearoute
+      - 【N】香港 普通 4 - Leaseweb
+      - 【O】香港 VIP 1 - Leaseweb
+      - 【O】香港 VIP 10 - Leaseweb
+      - 【O】香港 VIP 11 - Leaseweb
+      - 【O】香港 VIP 12 - Leaseweb
+      - 【O】香港 VIP 13 - Leaseweb
+      - 【O】香港 VIP 14 - Leaseweb
+      - 【O】香港 VIP 15 - Leaseweb
+      - 【O】香港 VIP 16 - Leaseweb
+      - 【O】香港 VIP 2 - Leaseweb
+      - 【O】香港 VIP 3 - Leaseweb
+      - 【O】香港 VIP 4 - Leaseweb
+      - 【O】香港 VIP 5 - Leaseweb
+      - 【O】香港 VIP 6 - Leaseweb
+      - 【O】香港 VIP 7 - Leaseweb
+      - 【O】香港 VIP 8 - Leaseweb
+      - 【O】香港 VIP 9 - Leaseweb
+      - 【O】香港 普通 1 - Leaseweb
+      - 【O】香港 普通 10 - Leaseweb
+      - 【O】香港 普通 2 - Leaseweb
+      - 【O】香港 普通 3 - Leaseweb
+      - 【O】香港 普通 4 - Leaseweb
+      - 【O】香港 普通 5 - Leaseweb
+      - 【O】香港 普通 6 - Leaseweb
+      - 【O】香港 普通 7 - Leaseweb
+      - 【O】香港 普通 8 - Leaseweb
+      - 【O】香港 普通 9 - Leaseweb
+      - 新网址：sockboom.link
+  - name: 故障切换
+    type: fallback
+    url: http://www.gstatic.com/generate_204
+    interval: 500
+    proxies:
+      - 【A】台湾  VIP 1 - 中华电信
+      - 【A】台湾  VIP 2 - 云高
+      - 【A】台湾  VIP 3 - 中华电信
+      - 【A】香港  VIP 1 - Nearoute
+      - 【A】香港  VIP 3 - Nearoute
+      - 【A】香港  VIP 5 - Leaseweb
+      - 【A】香港  VIP 6 - Leaseweb
+      - 【A】香港  VIP 8 - Nearoute
+      - 【A】香港 VIP 7 - Nearoute
+      - 【A】香港 普通 1 - Nearoute
+      - 【A】香港 普通 A - Nearoute
+      - 【A】香港 普通 B - Nearoute
+      - 【A】香港 普通 C - Nearoute
+      - 【A】香港 普通 D - Nearoute
+      - 【A】香港 普通 E - Nearoute
+      - 【A】香港 普通 F - Nearoute
+      - 【B】香港  VIP C - Nearoute
+      - 【B】香港  VIP F - Nearoute
+      - 【B】香港  普通 3 - Nearoute
+      - 【B】香港 普通 1 - Leaseweb
+      - 【B】香港 普通 1 - Nearoute
+      - 【B】香港 普通 2 - Nearoute
+      - 【B】香港 普通 3 - Nearoute
+      - 【B】香港 普通 4 -  Nearoute
+      - 【B】香港 普通 5 - Nearoute
+      - 【B】香港 普通 6 - Nearoute
+      - 【B】香港 普通 7 - Nearoute
+      - 【B】香港 普通 8 - Nearoute
+      - 【B】香港 普通 9 - Nearoute
+      - 【C】日本 VIP W - Leaseweb
+      - 【C】日本 VIP Y - Leaseweb
+      - 【C】狮城  VIP 6 - 阿里云
+      - 【C】狮城  VIP 7 - DO
+      - 【C】狮城 VIP C - 阿里云
+      - 【C】美国 VIP 1 - Netflix
+      - 【C】美国 VIP 2 - Netflix
+      - 【C】美国 VIP 3 - Netflix
+      - 【C】美国 VIP 4 - CC
+      - 【C】美国 VIP 5 - CC
+      - 【C】美国 VIP 6 - CC
+      - 【C】美国 普通 1 - CC
+      - 【C】美国 普通 2 - CC
+      - 【C】美国 普通 3 - CC
+      - 【C】美国 普通 4 - CC
+      - 【C】香港  VIP 9 - Nearoute
+      - 【E】俄罗斯  VIP 1 - RT
+      - 【E】俄罗斯  VIP 2 - RT
+      - 【E】俄罗斯  VIP 3 - RT
+      - 【E】俄罗斯  VIP 4 - RT
+      - 【F】土耳其 VIP 1 - Steam
+      - 【F】新加坡  VIP 1 - Linode
+      - 【F】新加坡  VIP 8 - Linode
+      - 【F】新加坡  VIP 9 - Linode
+      - 【F】新加坡  VIP A - Linode
+      - 【F】新加坡 VIP B - DO
+      - 【F】韩国  VIP 2 - VPC
+      - 【GAME】香港  VIP 2 - HGC
+      - 【GAME】香港  VIP 3 - HGC
+      - 【GAME】香港  VIP 4 - HGC
+      - 【GAME】香港  VIP 6 - HGC
+      - 【GAME】香港  VIP 8 - HGC
+      - 【GAME】香港  VIP 9 - HGC
+      - 【GAME】香港 VIP 1 - HGC
+      - 【GAME】香港 VIP 5 - HGC
+      - 【GAME】香港 VIP 7 - HGC
+      - 【IEPL】香港 普通 1 - Nearoute
+      - 【IEPL】香港 普通 2 - Nearoute
+      - 【IEPL】香港 普通 3 - Nearoute
+      - 【IEPL】香港 普通 4 - Nearoute
+      - 【IEPL】香港 普通 5 - Nearoute
+      - 【IEPL】香港 普通 6 - Nearoute
+      - 【IEPL】香港 普通 7 - Nearoute
+      - 【I】日本 VIP 1 - chatGPT
+      - 【I】日本 VIP 2 - chatGPT
+      - 【I】日本 VIP 3 - chatGPT
+      - 【I】日本 VIP 4 - chatGPT
+      - 【I】日本 VIP 5 - chatGPT
+      - 【I】日本 VIP 6 - chatGPT
+      - 【I】日本 VIP 7 - chatGPT
+      - 【I】日本 VIP 8 - chatGPT
+      - 【I】日本 VIP 9 - chatGPT
+      - 【I】日本 VIP A - chatGPT
+      - 【I】日本 VIP B - chatGPT
+      - 【I】蒙古 普通 A - MN
+      - 【J】香港 VIP 1 - Netflix
+      - 【J】香港 VIP 2 - Netflix
+      - 【J】香港 VIP 3 - Netflix
+      - 【J】香港 VIP 4 - Netflix
+      - 【J】香港 VIP 5 - Netflix
+      - 【J】香港 VIP 6 - Netflix
+      - 【J】香港 VIP 7 - Netflix
+      - 【J】香港 VIP 8 - Netflix
+      - 【J】香港 VIP 9 - Netflix
+      - 【J】香港 VIP A - Netflix
+      - 【J】香港 VIP B - Netflix
+      - 【J】香港 VIP C - Netflix
+      - 【J】香港 VIP D - Netflix
+      - 【J】香港 VIP E - Netflix
+      - 【K】新加坡 普通 1 - DO
+      - 【K】新加坡 普通 2 - DO
+      - 【K】新加坡 普通 3 - DO
+      - 【K】新加坡 普通 4 - DO
+      - 【K】新加坡 普通 5 - DO
+      - 【K】新加坡 普通 6 - DO
+      - 【K】新加坡 普通 7 - DO
+      - 【L】新加坡  VIP1 - chatGPT
+      - 【L】新加坡  VIP2 - chatGPT
+      - 【L】新加坡  VIP3 - chatGPT
+      - 【L】新加坡  VIP4 - chatGPT
+      - 【L】新加坡  VIP5 - chatGPT
+      - 【L】新加坡  VIP6 - chatGPT
+      - 【L】新加坡  VIP7 - chatGPT
+      - 【L】新加坡  VIP8 - chatGPT
+      - 【L】新加坡  VIP9 - chatGPT
+      - 【L】新加坡  VIPA - chatGPT
+      - 【L】马来西亚  VIP 1 - TMNet
+      - 【M】香港  VIP F - Leaseweb
+      - 【M】香港  VIP H - Leaseweb
+      - 【M】香港  VIP I - chatGPT
+      - 【M】香港 VIP 1 - Netflix
+      - 【M】香港 VIP 2 - Netflix
+      - 【M】香港 VIP 3 - Netflix
+      - 【M】香港 VIP 4 - Netflix
+      - 【M】香港 VIP 5 - Netflix
+      - 【M】香港 VIP 6 - Netflix
+      - 【M】香港 VIP 7 - Netflix
+      - 【M】香港 VIP 8 - Leaseweb
+      - 【M】香港 VIP 9 - Leaseweb
+      - 【M】香港 VIP A - Leaseweb
+      - 【M】香港 VIP B - Leaseweb
+      - 【M】香港 VIP C - Leaseweb
+      - 【M】香港 VIP D - chatGPT
+      - 【M】香港 VIP K - chatGPT
+      - 【M】香港 VIP T - Leaseweb
+      - 【M】香港 VIP X - Leaseweb
+      - 【M】香港 VIP Z - Leaseweb
+      - 【N】日本 VIP 1 - Nerocloud
+      - 【N】日本 VIP 10 - Nerocloud
+      - 【N】日本 VIP 11 - Nerocloud
+      - 【N】日本 VIP 12 - Nerocloud
+      - 【N】日本 VIP 13 - Nerocloud
+      - 【N】日本 VIP 14 - Nerocloud
+      - 【N】日本 VIP 15 - Nerocloud
+      - 【N】日本 VIP 2 - Nerocloud
+      - 【N】日本 VIP 3 - Nerocloud
+      - 【N】日本 VIP 4 - Nerocloud
+      - 【N】日本 VIP 5 - Nerocloud
+      - 【N】日本 VIP 6 - Nerocloud
+      - 【N】日本 VIP 7 - Nerocloud
+      - 【N】日本 VIP 8 - Nerocloud
+      - 【N】日本 VIP 9 - Nerocloud
+      - 【N】日本 VIP A - Leaseweb
+      - 【N】日本 VIP B - Leaseweb
+      - 【N】日本 VIP C - Leaseweb
+      - 【N】日本 VIP D - Leaseweb
+      - 【N】日本 VIP E - Leaseweb
+      - 【N】日本 VIP F - Leaseweb
+      - 【N】日本 VIP G - Leaseweb
+      - 【N】日本 普通 1 - Nerocloud
+      - 【N】日本 普通 2 - Nerocloud
+      - 【N】日本 普通 3 - Nerocloud
+      - 【N】日本 普通 4 - Nerocloud
+      - 【N】日本 普通 5 - Nerocloud
+      - 【N】香港 VIP 10 - Leaseweb
+      - 【N】香港 VIP 8 - Leaseweb
+      - 【N】香港 VIP 9 - Nearoute
+      - 【N】香港 普通 1 - Nearoute
+      - 【N】香港 普通 2 - Nearoute
+      - 【N】香港 普通 3 - Nearoute
+      - 【N】香港 普通 4 - Leaseweb
+      - 【O】香港 VIP 1 - Leaseweb
+      - 【O】香港 VIP 10 - Leaseweb
+      - 【O】香港 VIP 11 - Leaseweb
+      - 【O】香港 VIP 12 - Leaseweb
+      - 【O】香港 VIP 13 - Leaseweb
+      - 【O】香港 VIP 14 - Leaseweb
+      - 【O】香港 VIP 15 - Leaseweb
+      - 【O】香港 VIP 16 - Leaseweb
+      - 【O】香港 VIP 2 - Leaseweb
+      - 【O】香港 VIP 3 - Leaseweb
+      - 【O】香港 VIP 4 - Leaseweb
+      - 【O】香港 VIP 5 - Leaseweb
+      - 【O】香港 VIP 6 - Leaseweb
+      - 【O】香港 VIP 7 - Leaseweb
+      - 【O】香港 VIP 8 - Leaseweb
+      - 【O】香港 VIP 9 - Leaseweb
+      - 【O】香港 普通 1 - Leaseweb
+      - 【O】香港 普通 10 - Leaseweb
+      - 【O】香港 普通 2 - Leaseweb
+      - 【O】香港 普通 3 - Leaseweb
+      - 【O】香港 普通 4 - Leaseweb
+      - 【O】香港 普通 5 - Leaseweb
+      - 【O】香港 普通 6 - Leaseweb
+      - 【O】香港 普通 7 - Leaseweb
+      - 【O】香港 普通 8 - Leaseweb
+      - 【O】香港 普通 9 - Leaseweb
+      - 新网址：sockboom.link
+  - name: 最新域名
+    type: select
+    proxies:
+      - 新网址：sockboom.link
+rules:
+ - DOMAIN-SUFFIX,local,DIRECT
+ - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+ - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+ - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+ - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+ - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+ - IP-CIDR6,::1/128,DIRECT,no-resolve
+ - IP-CIDR6,fc00::/7,DIRECT,no-resolve
+ - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+ - IP-CIDR6,fd00::/8,DIRECT,no-resolve
+ - DOMAIN-SUFFIX,t.me,电报吹水
+ - DOMAIN-SUFFIX,tx.me,电报吹水
+ - DOMAIN-SUFFIX,tdesktop.com,电报吹水
+ - DOMAIN-SUFFIX,telegra.ph,电报吹水
+ - DOMAIN-SUFFIX,telegram.me,电报吹水
+ - DOMAIN-SUFFIX,telegram.org,电报吹水
+ - IP-CIDR,91.108.0.0/16,电报吹水,no-resolve
+ - IP-CIDR,109.239.140.0/24,电报吹水,no-resolve
+ - IP-CIDR,149.154.160.0/20,电报吹水,no-resolve
+ - IP-CIDR6,2001:67c:4e8::/48,电报吹水,no-resolve
+ - IP-CIDR6,2001:b28:f23d::/48,电报吹水,no-resolve
+ - IP-CIDR6,2001:b28:f23f::/48,电报吹水,no-resolve
+ - DOMAIN-SUFFIX,linkedin.com,节点选择
+ - DOMAIN-SUFFIX,appspot.com,节点选择
+ - DOMAIN-SUFFIX,blogger.com,节点选择
+ - DOMAIN-SUFFIX,getoutline.org,节点选择
+ - DOMAIN-SUFFIX,gvt0.com,节点选择
+ - DOMAIN-SUFFIX,gvt1.com,节点选择
+ - DOMAIN-SUFFIX,gvt3.com,节点选择
+ - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,节点选择
+ - DOMAIN-KEYWORD,google,节点选择
+ - DOMAIN-KEYWORD,blogspot,节点选择
+ - DOMAIN-SUFFIX,onedrive.live.com,节点选择
+ - DOMAIN-SUFFIX,xboxlive.com,节点选择
+ - DOMAIN-SUFFIX,cdninstagram.com,节点选择
+ - DOMAIN-SUFFIX,fb.com,节点选择
+ - DOMAIN-SUFFIX,fb.me,节点选择
+ - DOMAIN-SUFFIX,fbaddins.com,节点选择
+ - DOMAIN-SUFFIX,fbcdn.net,节点选择
+ - DOMAIN-SUFFIX,fbsbx.com,节点选择
+ - DOMAIN-SUFFIX,fbworkmail.com,节点选择
+ - DOMAIN-SUFFIX,instagram.com,节点选择
+ - DOMAIN-SUFFIX,m.me,节点选择
+ - DOMAIN-SUFFIX,messenger.com,节点选择
+ - DOMAIN-SUFFIX,oculus.com,节点选择
+ - DOMAIN-SUFFIX,oculuscdn.com,节点选择
+ - DOMAIN-SUFFIX,rocksdb.org,节点选择
+ - DOMAIN-SUFFIX,whatsapp.com,节点选择
+ - DOMAIN-SUFFIX,whatsapp.net,节点选择
+ - DOMAIN-KEYWORD,facebook,节点选择
+ - IP-CIDR,3.123.36.126/32,节点选择,no-resolve
+ - IP-CIDR,35.157.215.84/32,节点选择,no-resolve
+ - IP-CIDR,35.157.217.255/32,节点选择,no-resolve
+ - IP-CIDR,52.58.209.134/32,节点选择,no-resolve
+ - IP-CIDR,54.93.124.31/32,节点选择,no-resolve
+ - IP-CIDR,54.162.243.80/32,节点选择,no-resolve
+ - IP-CIDR,54.173.34.141/32,节点选择,no-resolve
+ - IP-CIDR,54.235.23.242/32,节点选择,no-resolve
+ - IP-CIDR,169.45.248.118/32,节点选择,no-resolve
+ - DOMAIN-SUFFIX,pscp.tv,节点选择
+ - DOMAIN-SUFFIX,periscope.tv,节点选择
+ - DOMAIN-SUFFIX,t.co,节点选择
+ - DOMAIN-SUFFIX,twimg.co,节点选择
+ - DOMAIN-SUFFIX,twimg.com,节点选择
+ - DOMAIN-SUFFIX,twitpic.com,节点选择
+ - DOMAIN-SUFFIX,vine.co,节点选择
+ - DOMAIN-KEYWORD,twitter,节点选择
+ - DOMAIN-SUFFIX,t.me,节点选择
+ - DOMAIN-SUFFIX,tdesktop.com,节点选择
+ - DOMAIN-SUFFIX,telegra.ph,节点选择
+ - DOMAIN-SUFFIX,telegram.me,节点选择
+ - DOMAIN-SUFFIX,telegram.org,节点选择
+ - IP-CIDR,91.108.4.0/22,节点选择,no-resolve
+ - IP-CIDR,91.108.8.0/22,节点选择,no-resolve
+ - IP-CIDR,91.108.12.0/22,节点选择,no-resolve
+ - IP-CIDR,91.108.16.0/22,节点选择,no-resolve
+ - IP-CIDR,91.108.56.0/22,节点选择,no-resolve
+ - IP-CIDR,149.154.160.0/20,节点选择,no-resolve
+ - DOMAIN-SUFFIX,line.me,节点选择
+ - DOMAIN-SUFFIX,line-apps.com,节点选择
+ - DOMAIN-SUFFIX,line-scdn.net,节点选择
+ - DOMAIN-SUFFIX,naver.jp,节点选择
+ - IP-CIDR,103.2.30.0/23,节点选择,no-resolve
+ - IP-CIDR,125.209.208.0/20,节点选择,no-resolve
+ - IP-CIDR,147.92.128.0/17,节点选择,no-resolve
+ - IP-CIDR,203.104.144.0/21,节点选择,no-resolve
+ - DOMAIN-SUFFIX,4shared.com,节点选择
+ - DOMAIN-SUFFIX,520cc.cc,节点选择
+ - DOMAIN-SUFFIX,881903.com,节点选择
+ - DOMAIN-SUFFIX,9cache.com,节点选择
+ - DOMAIN-SUFFIX,9gag.com,节点选择
+ - DOMAIN-SUFFIX,abc.com,节点选择
+ - DOMAIN-SUFFIX,abc.net.au,节点选择
+ - DOMAIN-SUFFIX,abebooks.com,节点选择
+ - DOMAIN-SUFFIX,amazon.co.jp,节点选择
+ - DOMAIN-SUFFIX,apigee.com,节点选择
+ - DOMAIN-SUFFIX,apk-dl.com,节点选择
+ - DOMAIN-SUFFIX,apkfind.com,节点选择
+ - DOMAIN-SUFFIX,apkmirror.com,节点选择
+ - DOMAIN-SUFFIX,apkmonk.com,节点选择
+ - DOMAIN-SUFFIX,apkpure.com,节点选择
+ - DOMAIN-SUFFIX,aptoide.com,节点选择
+ - DOMAIN-SUFFIX,archive.is,节点选择
+ - DOMAIN-SUFFIX,archive.org,节点选择
+ - DOMAIN-SUFFIX,arte.tv,节点选择
+ - DOMAIN-SUFFIX,artstation.com,节点选择
+ - DOMAIN-SUFFIX,arukas.io,节点选择
+ - DOMAIN-SUFFIX,ask.com,节点选择
+ - DOMAIN-SUFFIX,avg.com,节点选择
+ - DOMAIN-SUFFIX,avgle.com,节点选择
+ - DOMAIN-SUFFIX,badoo.com,节点选择
+ - DOMAIN-SUFFIX,bandwagonhost.com,节点选择
+ - DOMAIN-SUFFIX,bbc.com,节点选择
+ - DOMAIN-SUFFIX,behance.net,节点选择
+ - DOMAIN-SUFFIX,bibox.com,节点选择
+ - DOMAIN-SUFFIX,biggo.com.tw,节点选择
+ - DOMAIN-SUFFIX,binance.com,节点选择
+ - DOMAIN-SUFFIX,bitcointalk.org,节点选择
+ - DOMAIN-SUFFIX,bitfinex.com,节点选择
+ - DOMAIN-SUFFIX,bitmex.com,节点选择
+ - DOMAIN-SUFFIX,bit-z.com,节点选择
+ - DOMAIN-SUFFIX,bloglovin.com,节点选择
+ - DOMAIN-SUFFIX,bloomberg.cn,节点选择
+ - DOMAIN-SUFFIX,bloomberg.com,节点选择
+ - DOMAIN-SUFFIX,blubrry.com,节点选择
+ - DOMAIN-SUFFIX,book.com.tw,节点选择
+ - DOMAIN-SUFFIX,booklive.jp,节点选择
+ - DOMAIN-SUFFIX,books.com.tw,节点选择
+ - DOMAIN-SUFFIX,boslife.net,节点选择
+ - DOMAIN-SUFFIX,box.com,节点选择
+ - DOMAIN-SUFFIX,businessinsider.com,节点选择
+ - DOMAIN-SUFFIX,bwh1.net,节点选择
+ - DOMAIN-SUFFIX,castbox.fm,节点选择
+ - DOMAIN-SUFFIX,cbc.ca,节点选择
+ - DOMAIN-SUFFIX,cdw.com,节点选择
+ - DOMAIN-SUFFIX,change.org,节点选择
+ - DOMAIN-SUFFIX,channelnewsasia.com,节点选择
+ - DOMAIN-SUFFIX,ck101.com,节点选择
+ - DOMAIN-SUFFIX,clarionproject.org,节点选择
+ - DOMAIN-SUFFIX,clyp.it,节点选择
+ - DOMAIN-SUFFIX,cna.com.tw,节点选择
+ - DOMAIN-SUFFIX,comparitech.com,节点选择
+ - DOMAIN-SUFFIX,conoha.jp,节点选择
+ - DOMAIN-SUFFIX,crucial.com,节点选择
+ - DOMAIN-SUFFIX,cts.com.tw,节点选择
+ - DOMAIN-SUFFIX,cw.com.tw,节点选择
+ - DOMAIN-SUFFIX,cyberctm.com,节点选择
+ - DOMAIN-SUFFIX,dailymotion.com,节点选择
+ - DOMAIN-SUFFIX,dailyview.tw,节点选择
+ - DOMAIN-SUFFIX,daum.net,节点选择
+ - DOMAIN-SUFFIX,daumcdn.net,节点选择
+ - DOMAIN-SUFFIX,dcard.tw,节点选择
+ - DOMAIN-SUFFIX,deepdiscount.com,节点选择
+ - DOMAIN-SUFFIX,depositphotos.com,节点选择
+ - DOMAIN-SUFFIX,deviantart.com,节点选择
+ - DOMAIN-SUFFIX,disconnect.me,节点选择
+ - DOMAIN-SUFFIX,discordapp.com,节点选择
+ - DOMAIN-SUFFIX,discordapp.net,节点选择
+ - DOMAIN-SUFFIX,disqus.com,节点选择
+ - DOMAIN-SUFFIX,dlercloud.com,节点选择
+ - DOMAIN-SUFFIX,dns2go.com,节点选择
+ - DOMAIN-SUFFIX,dowjones.com,节点选择
+ - DOMAIN-SUFFIX,dropbox.com,节点选择
+ - DOMAIN-SUFFIX,dropboxusercontent.com,节点选择
+ - DOMAIN-SUFFIX,duckduckgo.com,节点选择
+ - DOMAIN-SUFFIX,dw.com,节点选择
+ - DOMAIN-SUFFIX,dynu.com,节点选择
+ - DOMAIN-SUFFIX,earthcam.com,节点选择
+ - DOMAIN-SUFFIX,ebookservice.tw,节点选择
+ - DOMAIN-SUFFIX,economist.com,节点选择
+ - DOMAIN-SUFFIX,edgecastcdn.net,节点选择
+ - DOMAIN-SUFFIX,edu,节点选择
+ - DOMAIN-SUFFIX,elpais.com,节点选择
+ - DOMAIN-SUFFIX,enanyang.my,节点选择
+ - DOMAIN-SUFFIX,encyclopedia.com,节点选择
+ - DOMAIN-SUFFIX,esoir.be,节点选择
+ - DOMAIN-SUFFIX,etherscan.io,节点选择
+ - DOMAIN-SUFFIX,euronews.com,节点选择
+ - DOMAIN-SUFFIX,evozi.com,节点选择
+ - DOMAIN-SUFFIX,feedly.com,节点选择
+ - DOMAIN-SUFFIX,firech.at,节点选择
+ - DOMAIN-SUFFIX,flickr.com,节点选择
+ - DOMAIN-SUFFIX,flitto.com,节点选择
+ - DOMAIN-SUFFIX,foreignpolicy.com,节点选择
+ - DOMAIN-SUFFIX,freebrowser.org,节点选择
+ - DOMAIN-SUFFIX,freewechat.com,节点选择
+ - DOMAIN-SUFFIX,freeweibo.com,节点选择
+ - DOMAIN-SUFFIX,friday.tw,节点选择
+ - DOMAIN-SUFFIX,ftchinese.com,节点选择
+ - DOMAIN-SUFFIX,ftimg.net,节点选择
+ - DOMAIN-SUFFIX,gate.io,节点选择
+ - DOMAIN-SUFFIX,getlantern.org,节点选择
+ - DOMAIN-SUFFIX,getsync.com,节点选择
+ - DOMAIN-SUFFIX,globalvoices.org,节点选择
+ - DOMAIN-SUFFIX,goo.ne.jp,节点选择
+ - DOMAIN-SUFFIX,goodreads.com,节点选择
+ - DOMAIN-SUFFIX,gov,节点选择
+ - DOMAIN-SUFFIX,gov.tw,节点选择
+ - DOMAIN-SUFFIX,greatfire.org,节点选择
+ - DOMAIN-SUFFIX,gumroad.com,节点选择
+ - DOMAIN-SUFFIX,hbg.com,节点选择
+ - DOMAIN-SUFFIX,heroku.com,节点选择
+ - DOMAIN-SUFFIX,hightail.com,节点选择
+ - DOMAIN-SUFFIX,hk01.com,节点选择
+ - DOMAIN-SUFFIX,hkbf.org,节点选择
+ - DOMAIN-SUFFIX,hkbookcity.com,节点选择
+ - DOMAIN-SUFFIX,hkej.com,节点选择
+ - DOMAIN-SUFFIX,hket.com,节点选择
+ - DOMAIN-SUFFIX,hkgolden.com,节点选择
+ - DOMAIN-SUFFIX,hootsuite.com,节点选择
+ - DOMAIN-SUFFIX,hudson.org,节点选择
+ - DOMAIN-SUFFIX,hyread.com.tw,节点选择
+ - DOMAIN-SUFFIX,ibtimes.com,节点选择
+ - DOMAIN-SUFFIX,i-cable.com,节点选择
+ - DOMAIN-SUFFIX,icij.org,节点选择
+ - DOMAIN-SUFFIX,icoco.com,节点选择
+ - DOMAIN-SUFFIX,imgur.com,节点选择
+ - DOMAIN-SUFFIX,initiummall.com,节点选择
+ - DOMAIN-SUFFIX,insecam.org,节点选择
+ - DOMAIN-SUFFIX,ipfs.io,节点选择
+ - DOMAIN-SUFFIX,issuu.com,节点选择
+ - DOMAIN-SUFFIX,istockphoto.com,节点选择
+ - DOMAIN-SUFFIX,japantimes.co.jp,节点选择
+ - DOMAIN-SUFFIX,jiji.com,节点选择
+ - DOMAIN-SUFFIX,jinx.com,节点选择
+ - DOMAIN-SUFFIX,jkforum.net,节点选择
+ - DOMAIN-SUFFIX,joinmastodon.org,节点选择
+ - DOMAIN-SUFFIX,justmysocks.net,节点选择
+ - DOMAIN-SUFFIX,justpaste.it,节点选择
+ - DOMAIN-SUFFIX,kakao.com,节点选择
+ - DOMAIN-SUFFIX,kakaocorp.com,节点选择
+ - DOMAIN-SUFFIX,kik.com,节点选择
+ - DOMAIN-SUFFIX,kobo.com,节点选择
+ - DOMAIN-SUFFIX,kobobooks.com,节点选择
+ - DOMAIN-SUFFIX,kodingen.com,节点选择
+ - DOMAIN-SUFFIX,lemonde.fr,节点选择
+ - DOMAIN-SUFFIX,lepoint.fr,节点选择
+ - DOMAIN-SUFFIX,lihkg.com,节点选择
+ - DOMAIN-SUFFIX,listennotes.com,节点选择
+ - DOMAIN-SUFFIX,livestream.com,节点选择
+ - DOMAIN-SUFFIX,logmein.com,节点选择
+ - DOMAIN-SUFFIX,mail.ru,节点选择
+ - DOMAIN-SUFFIX,mailchimp.com,节点选择
+ - DOMAIN-SUFFIX,marc.info,节点选择
+ - DOMAIN-SUFFIX,matters.news,节点选择
+ - DOMAIN-SUFFIX,maying.co,节点选择
+ - DOMAIN-SUFFIX,medium.com,节点选择
+ - DOMAIN-SUFFIX,mega.nz,节点选择
+ - DOMAIN-SUFFIX,mil,节点选择
+ - DOMAIN-SUFFIX,mingpao.com,节点选择
+ - DOMAIN-SUFFIX,mobile01.com,节点选择
+ - DOMAIN-SUFFIX,myspace.com,节点选择
+ - DOMAIN-SUFFIX,myspacecdn.com,节点选择
+ - DOMAIN-SUFFIX,nanyang.com,节点选择
+ - DOMAIN-SUFFIX,naver.com,节点选择
+ - DOMAIN-SUFFIX,neowin.net,节点选择
+ - DOMAIN-SUFFIX,newstapa.org,节点选择
+ - DOMAIN-SUFFIX,nexitally.com,节点选择
+ - DOMAIN-SUFFIX,nhk.or.jp,节点选择
+ - DOMAIN-SUFFIX,nicovideo.jp,节点选择
+ - DOMAIN-SUFFIX,nii.ac.jp,节点选择
+ - DOMAIN-SUFFIX,nikkei.com,节点选择
+ - DOMAIN-SUFFIX,nofile.io,节点选择
+ - DOMAIN-SUFFIX,now.com,节点选择
+ - DOMAIN-SUFFIX,nrk.no,节点选择
+ - DOMAIN-SUFFIX,nyt.com,节点选择
+ - DOMAIN-SUFFIX,nytchina.com,节点选择
+ - DOMAIN-SUFFIX,nytcn.me,节点选择
+ - DOMAIN-SUFFIX,nytco.com,节点选择
+ - DOMAIN-SUFFIX,nytimes.com,节点选择
+ - DOMAIN-SUFFIX,nytimg.com,节点选择
+ - DOMAIN-SUFFIX,nytlog.com,节点选择
+ - DOMAIN-SUFFIX,nytstyle.com,节点选择
+ - DOMAIN-SUFFIX,ok.ru,节点选择
+ - DOMAIN-SUFFIX,okex.com,节点选择
+ - DOMAIN-SUFFIX,on.cc,节点选择
+ - DOMAIN-SUFFIX,orientaldaily.com.my,节点选择
+ - DOMAIN-SUFFIX,overcast.fm,节点选择
+ - DOMAIN-SUFFIX,paltalk.com,节点选择
+ - DOMAIN-SUFFIX,pao-pao.net,节点选择
+ - DOMAIN-SUFFIX,parsevideo.com,节点选择
+ - DOMAIN-SUFFIX,pbxes.com,节点选择
+ - DOMAIN-SUFFIX,pcdvd.com.tw,节点选择
+ - DOMAIN-SUFFIX,pchome.com.tw,节点选择
+ - DOMAIN-SUFFIX,pcloud.com,节点选择
+ - DOMAIN-SUFFIX,picacomic.com,节点选择
+ - DOMAIN-SUFFIX,pinimg.com,节点选择
+ - DOMAIN-SUFFIX,pixiv.net,节点选择
+ - DOMAIN-SUFFIX,player.fm,节点选择
+ - DOMAIN-SUFFIX,plurk.com,节点选择
+ - DOMAIN-SUFFIX,po18.tw,节点选择
+ - DOMAIN-SUFFIX,potato.im,节点选择
+ - DOMAIN-SUFFIX,potatso.com,节点选择
+ - DOMAIN-SUFFIX,prism-break.org,节点选择
+ - DOMAIN-SUFFIX,proxifier.com,节点选择
+ - DOMAIN-SUFFIX,pt.im,节点选择
+ - DOMAIN-SUFFIX,pts.org.tw,节点选择
+ - DOMAIN-SUFFIX,pubu.com.tw,节点选择
+ - DOMAIN-SUFFIX,pubu.tw,节点选择
+ - DOMAIN-SUFFIX,pureapk.com,节点选择
+ - DOMAIN-SUFFIX,quora.com,节点选择
+ - DOMAIN-SUFFIX,quoracdn.net,节点选择
+ - DOMAIN-SUFFIX,rakuten.co.jp,节点选择
+ - DOMAIN-SUFFIX,readingtimes.com.tw,节点选择
+ - DOMAIN-SUFFIX,readmoo.com,节点选择
+ - DOMAIN-SUFFIX,redbubble.com,节点选择
+ - DOMAIN-SUFFIX,reddit.com,节点选择
+ - DOMAIN-SUFFIX,redditmedia.com,节点选择
+ - DOMAIN-SUFFIX,resilio.com,节点选择
+ - DOMAIN-SUFFIX,reuters.com,节点选择
+ - DOMAIN-SUFFIX,reutersmedia.net,节点选择
+ - DOMAIN-SUFFIX,rfi.fr,节点选择
+ - DOMAIN-SUFFIX,rixcloud.com,节点选择
+ - DOMAIN-SUFFIX,roadshow.hk,节点选择
+ - DOMAIN-SUFFIX,scmp.com,节点选择
+ - DOMAIN-SUFFIX,scribd.com,节点选择
+ - DOMAIN-SUFFIX,seatguru.com,节点选择
+ - DOMAIN-SUFFIX,shadowsocks.org,节点选择
+ - DOMAIN-SUFFIX,shopee.tw,节点选择
+ - DOMAIN-SUFFIX,slideshare.net,节点选择
+ - DOMAIN-SUFFIX,softfamous.com,节点选择
+ - DOMAIN-SUFFIX,soundcloud.com,节点选择
+ - DOMAIN-SUFFIX,ssrcloud.org,节点选择
+ - DOMAIN-SUFFIX,startpage.com,节点选择
+ - DOMAIN-SUFFIX,steamcommunity.com,节点选择
+ - DOMAIN-SUFFIX,steemit.com,节点选择
+ - DOMAIN-SUFFIX,steemitwallet.com,节点选择
+ - DOMAIN-SUFFIX,t66y.com,节点选择
+ - DOMAIN-SUFFIX,tapatalk.com,节点选择
+ - DOMAIN-SUFFIX,teco-hk.org,节点选择
+ - DOMAIN-SUFFIX,teco-mo.org,节点选择
+ - DOMAIN-SUFFIX,teddysun.com,节点选择
+ - DOMAIN-SUFFIX,textnow.me,节点选择
+ - DOMAIN-SUFFIX,theguardian.com,节点选择
+ - DOMAIN-SUFFIX,theinitium.com,节点选择
+ - DOMAIN-SUFFIX,thetvdb.com,节点选择
+ - DOMAIN-SUFFIX,tineye.com,节点选择
+ - DOMAIN-SUFFIX,torproject.org,节点选择
+ - DOMAIN-SUFFIX,tumblr.com,节点选择
+ - DOMAIN-SUFFIX,turbobit.net,节点选择
+ - DOMAIN-SUFFIX,tutanota.com,节点选择
+ - DOMAIN-SUFFIX,tvboxnow.com,节点选择
+ - DOMAIN-SUFFIX,udn.com,节点选择
+ - DOMAIN-SUFFIX,unseen.is,节点选择
+ - DOMAIN-SUFFIX,upmedia.mg,节点选择
+ - DOMAIN-SUFFIX,uptodown.com,节点选择
+ - DOMAIN-SUFFIX,urbandictionary.com,节点选择
+ - DOMAIN-SUFFIX,ustream.tv,节点选择
+ - DOMAIN-SUFFIX,uwants.com,节点选择
+ - DOMAIN-SUFFIX,v2ray.com,节点选择
+ - DOMAIN-SUFFIX,viber.com,节点选择
+ - DOMAIN-SUFFIX,videopress.com,节点选择
+ - DOMAIN-SUFFIX,vimeo.com,节点选择
+ - DOMAIN-SUFFIX,voachinese.com,节点选择
+ - DOMAIN-SUFFIX,voanews.com,节点选择
+ - DOMAIN-SUFFIX,voxer.com,节点选择
+ - DOMAIN-SUFFIX,vzw.com,节点选择
+ - DOMAIN-SUFFIX,w3schools.com,节点选择
+ - DOMAIN-SUFFIX,washingtonpost.com,节点选择
+ - DOMAIN-SUFFIX,wattpad.com,节点选择
+ - DOMAIN-SUFFIX,whoer.net,节点选择
+ - DOMAIN-SUFFIX,wikimapia.org,节点选择
+ - DOMAIN-SUFFIX,wikipedia.org,节点选择
+ - DOMAIN-SUFFIX,wikiquote.org,节点选择
+ - DOMAIN-SUFFIX,wikiwand.com,节点选择
+ - DOMAIN-SUFFIX,winudf.com,节点选择
+ - DOMAIN-SUFFIX,wire.com,节点选择
+ - DOMAIN-SUFFIX,wordpress.com,节点选择
+ - DOMAIN-SUFFIX,workflow.is,节点选择
+ - DOMAIN-SUFFIX,worldcat.org,节点选择
+ - DOMAIN-SUFFIX,wsj.com,节点选择
+ - DOMAIN-SUFFIX,wsj.net,节点选择
+ - DOMAIN-SUFFIX,xhamster.com,节点选择
+ - DOMAIN-SUFFIX,xn--90wwvt03e.com,节点选择
+ - DOMAIN-SUFFIX,xn--i2ru8q2qg.com,节点选择
+ - DOMAIN-SUFFIX,xnxx.com,节点选择
+ - DOMAIN-SUFFIX,xvideos.com,节点选择
+ - DOMAIN-SUFFIX,yahoo.com,节点选择
+ - DOMAIN-SUFFIX,yandex.ru,节点选择
+ - DOMAIN-SUFFIX,ycombinator.com,节点选择
+ - DOMAIN-SUFFIX,yesasia.com,节点选择
+ - DOMAIN-SUFFIX,yes-news.com,节点选择
+ - DOMAIN-SUFFIX,yomiuri.co.jp,节点选择
+ - DOMAIN-SUFFIX,you-get.org,节点选择
+ - DOMAIN-SUFFIX,zaobao.com,节点选择
+ - DOMAIN-SUFFIX,zb.com,节点选择
+ - DOMAIN-SUFFIX,zello.com,节点选择
+ - DOMAIN-SUFFIX,zeronet.io,节点选择
+ - DOMAIN-SUFFIX,zoom.us,节点选择
+ - DOMAIN-KEYWORD,github,节点选择
+ - DOMAIN-KEYWORD,jav,节点选择
+ - DOMAIN-KEYWORD,pinterest,节点选择
+ - DOMAIN-KEYWORD,porn,节点选择
+ - DOMAIN-KEYWORD,wikileaks,节点选择
+ - DOMAIN-SUFFIX,apartmentratings.com,节点选择
+ - DOMAIN-SUFFIX,apartments.com,节点选择
+ - DOMAIN-SUFFIX,bankmobilevibe.com,节点选择
+ - DOMAIN-SUFFIX,bing.com,节点选择
+ - DOMAIN-SUFFIX,booktopia.com.au,节点选择
+ - DOMAIN-SUFFIX,cccat.io,节点选择
+ - DOMAIN-SUFFIX,centauro.com.br,节点选择
+ - DOMAIN-SUFFIX,clearsurance.com,节点选择
+ - DOMAIN-SUFFIX,costco.com,节点选择
+ - DOMAIN-SUFFIX,crackle.com,节点选择
+ - DOMAIN-SUFFIX,depositphotos.cn,节点选择
+ - DOMAIN-SUFFIX,dish.com,节点选择
+ - DOMAIN-SUFFIX,dmm.co.jp,节点选择
+ - DOMAIN-SUFFIX,dmm.com,节点选择
+ - DOMAIN-SUFFIX,dnvod.tv,节点选择
+ - DOMAIN-SUFFIX,esurance.com,节点选择
+ - DOMAIN-SUFFIX,extmatrix.com,节点选择
+ - DOMAIN-SUFFIX,fastpic.ru,节点选择
+ - DOMAIN-SUFFIX,flipboard.com,节点选择
+ - DOMAIN-SUFFIX,fnac.be,节点选择
+ - DOMAIN-SUFFIX,fnac.com,节点选择
+ - DOMAIN-SUFFIX,funkyimg.com,节点选择
+ - DOMAIN-SUFFIX,fxnetworks.com,节点选择
+ - DOMAIN-SUFFIX,gettyimages.com,节点选择
+ - DOMAIN-SUFFIX,go.com,节点选择
+ - DOMAIN-SUFFIX,here.com,节点选择
+ - DOMAIN-SUFFIX,jcpenney.com,节点选择
+ - DOMAIN-SUFFIX,jiehua.tv,节点选择
+ - DOMAIN-SUFFIX,mailfence.com,节点选择
+ - DOMAIN-SUFFIX,nationwide.com,节点选择
+ - DOMAIN-SUFFIX,nbc.com,节点选择
+ - DOMAIN-SUFFIX,nexon.com,节点选择
+ - DOMAIN-SUFFIX,nordstrom.com,节点选择
+ - DOMAIN-SUFFIX,nordstromimage.com,节点选择
+ - DOMAIN-SUFFIX,nordstromrack.com,节点选择
+ - DOMAIN-SUFFIX,superpages.com,节点选择
+ - DOMAIN-SUFFIX,target.com,节点选择
+ - DOMAIN-SUFFIX,thinkgeek.com,节点选择
+ - DOMAIN-SUFFIX,tracfone.com,节点选择
+ - DOMAIN-SUFFIX,unity3d.com,节点选择
+ - DOMAIN-SUFFIX,uploader.jp,节点选择
+ - DOMAIN-SUFFIX,vevo.com,节点选择
+ - DOMAIN-SUFFIX,viu.tv,节点选择
+ - DOMAIN-SUFFIX,vk.com,节点选择
+ - DOMAIN-SUFFIX,vsco.co,节点选择
+ - DOMAIN-SUFFIX,xfinity.com,节点选择
+ - DOMAIN-SUFFIX,zattoo.com,节点选择
+ - DOMAIN,testflight.apple.com,节点选择
+ - DOMAIN-SUFFIX,appsto.re,节点选择
+ - DOMAIN,books.itunes.apple.com,节点选择
+ - DOMAIN,hls.itunes.apple.com,节点选择
+ - DOMAIN,apps.apple.com,节点选择
+ - DOMAIN,itunes.apple.com,节点选择
+ - DOMAIN,api-glb-sea.smoot.apple.com,节点选择
+ - DOMAIN,lookup-api.apple.com,节点选择
+ - PROCESS-NAME,LookupViewService,节点选择
+ - DOMAIN,gspe1-ssl.ls.apple.com,节点选择
+ - PROCESS-NAME,News,节点选择
+ - DOMAIN-SUFFIX,apple.news,节点选择
+ - DOMAIN,news-client.apple.com,节点选择
+ - DOMAIN,news-edge.apple.com,节点选择
+ - DOMAIN,news-events.apple.com,节点选择
+ - DOMAIN,apple.comscoreresearch.com,节点选择
+ - DOMAIN-SUFFIX,abc.xyz,节点选择
+ - DOMAIN-SUFFIX,android.com,节点选择
+ - DOMAIN-SUFFIX,androidify.com,节点选择
+ - DOMAIN-SUFFIX,dialogflow.com,节点选择
+ - DOMAIN-SUFFIX,autodraw.com,节点选择
+ - DOMAIN-SUFFIX,capitalg.com,节点选择
+ - DOMAIN-SUFFIX,certificate-transparency.org,节点选择
+ - DOMAIN-SUFFIX,chrome.com,节点选择
+ - DOMAIN-SUFFIX,chromeexperiments.com,节点选择
+ - DOMAIN-SUFFIX,chromestatus.com,节点选择
+ - DOMAIN-SUFFIX,chromium.org,节点选择
+ - DOMAIN-SUFFIX,creativelab5.com,节点选择
+ - DOMAIN-SUFFIX,debug.com,节点选择
+ - DOMAIN-SUFFIX,deepmind.com,节点选择
+ - DOMAIN-SUFFIX,firebaseio.com,节点选择
+ - DOMAIN-SUFFIX,getmdl.io,节点选择
+ - DOMAIN-SUFFIX,ggpht.com,节点选择
+ - DOMAIN-SUFFIX,gmail.com,节点选择
+ - DOMAIN-SUFFIX,gmodules.com,节点选择
+ - DOMAIN-SUFFIX,godoc.org,节点选择
+ - DOMAIN-SUFFIX,golang.org,节点选择
+ - DOMAIN-SUFFIX,gstatic.com,节点选择
+ - DOMAIN-SUFFIX,gv.com,节点选择
+ - DOMAIN-SUFFIX,gwtproject.org,节点选择
+ - DOMAIN-SUFFIX,itasoftware.com,节点选择
+ - DOMAIN-SUFFIX,madewithcode.com,节点选择
+ - DOMAIN-SUFFIX,material.io,节点选择
+ - DOMAIN-SUFFIX,polymer-project.org,节点选择
+ - DOMAIN-SUFFIX,admin.recaptcha.net,节点选择
+ - DOMAIN-SUFFIX,recaptcha.net,节点选择
+ - DOMAIN-SUFFIX,shattered.io,节点选择
+ - DOMAIN-SUFFIX,synergyse.com,节点选择
+ - DOMAIN-SUFFIX,tensorflow.org,节点选择
+ - DOMAIN-SUFFIX,tfhub.dev,节点选择
+ - DOMAIN-SUFFIX,tiltbrush.com,节点选择
+ - DOMAIN-SUFFIX,waveprotocol.org,节点选择
+ - DOMAIN-SUFFIX,waymo.com,节点选择
+ - DOMAIN-SUFFIX,webmproject.org,节点选择
+ - DOMAIN-SUFFIX,webrtc.org,节点选择
+ - DOMAIN-SUFFIX,whatbrowser.org,节点选择
+ - DOMAIN-SUFFIX,widevine.com,节点选择
+ - DOMAIN-SUFFIX,x.company,节点选择
+ - DOMAIN-SUFFIX,youtu.be,节点选择
+ - DOMAIN-SUFFIX,yt.be,节点选择
+ - DOMAIN-SUFFIX,ytimg.com,节点选择
+ - DOMAIN-SUFFIX,1drv.com,节点选择
+ - DOMAIN-SUFFIX,1drv.ms,节点选择
+ - DOMAIN-SUFFIX,blob.core.windows.net,节点选择
+ - DOMAIN-SUFFIX,livefilestore.com,节点选择
+ - DOMAIN-SUFFIX,onedrive.com,节点选择
+ - DOMAIN-SUFFIX,storage.live.com,节点选择
+ - DOMAIN-SUFFIX,storage.msn.com,节点选择
+ - DOMAIN,oneclient.sfx.ms,节点选择
+ - DOMAIN-SUFFIX,0rz.tw,节点选择
+ - DOMAIN-SUFFIX,4bluestones.biz,节点选择
+ - DOMAIN-SUFFIX,9bis.net,节点选择
+ - DOMAIN-SUFFIX,allconnected.co,节点选择
+ - DOMAIN-SUFFIX,aol.com,节点选择
+ - DOMAIN-SUFFIX,bcc.com.tw,节点选择
+ - DOMAIN-SUFFIX,bit.ly,节点选择
+ - DOMAIN-SUFFIX,bitshare.com,节点选择
+ - DOMAIN-SUFFIX,blog.jp,节点选择
+ - DOMAIN-SUFFIX,blogimg.jp,节点选择
+ - DOMAIN-SUFFIX,blogtd.org,节点选择
+ - DOMAIN-SUFFIX,broadcast.co.nz,节点选择
+ - DOMAIN-SUFFIX,camfrog.com,节点选择
+ - DOMAIN-SUFFIX,cfos.de,节点选择
+ - DOMAIN-SUFFIX,citypopulation.de,节点选择
+ - DOMAIN-SUFFIX,cloudfront.net,节点选择
+ - DOMAIN-SUFFIX,ctitv.com.tw,节点选择
+ - DOMAIN-SUFFIX,cuhk.edu.hk,节点选择
+ - DOMAIN-SUFFIX,cusu.hk,节点选择
+ - DOMAIN-SUFFIX,discord.gg,节点选择
+ - DOMAIN-SUFFIX,discuss.com.hk,节点选择
+ - DOMAIN-SUFFIX,dropboxapi.com,节点选择
+ - DOMAIN-SUFFIX,duolingo.cn,节点选择
+ - DOMAIN-SUFFIX,edditstatic.com,节点选择
+ - DOMAIN-SUFFIX,flickriver.com,节点选择
+ - DOMAIN-SUFFIX,focustaiwan.tw,节点选择
+ - DOMAIN-SUFFIX,free.fr,节点选择
+ - DOMAIN-SUFFIX,gigacircle.com,节点选择
+ - DOMAIN-SUFFIX,hk-pub.com,节点选择
+ - DOMAIN-SUFFIX,hosting.co.uk,节点选择
+ - DOMAIN-SUFFIX,hwcdn.net,节点选择
+ - DOMAIN-SUFFIX,ifixit.com,节点选择
+ - DOMAIN-SUFFIX,iphone4hongkong.com,节点选择
+ - DOMAIN-SUFFIX,iphonetaiwan.org,节点选择
+ - DOMAIN-SUFFIX,iptvbin.com,节点选择
+ - DOMAIN-SUFFIX,jtvnw.net,节点选择
+ - DOMAIN-SUFFIX,linksalpha.com,节点选择
+ - DOMAIN-SUFFIX,manyvids.com,节点选择
+ - DOMAIN-SUFFIX,myactimes.com,节点选择
+ - DOMAIN-SUFFIX,newsblur.com,节点选择
+ - DOMAIN-SUFFIX,now.im,节点选择
+ - DOMAIN-SUFFIX,nowe.com,节点选择
+ - DOMAIN-SUFFIX,redditlist.com,节点选择
+ - DOMAIN-SUFFIX,s3.amazonaws.com,节点选择
+ - DOMAIN-SUFFIX,signal.org,节点选择
+ - DOMAIN-SUFFIX,smartmailcloud.com,节点选择
+ - DOMAIN-SUFFIX,sparknotes.com,节点选择
+ - DOMAIN-SUFFIX,streetvoice.com,节点选择
+ - DOMAIN-SUFFIX,supertop.co,节点选择
+ - DOMAIN-SUFFIX,tv.com,节点选择
+ - DOMAIN-SUFFIX,typepad.com,节点选择
+ - DOMAIN-SUFFIX,udnbkk.com,节点选择
+ - DOMAIN-SUFFIX,urbanairship.com,节点选择
+ - DOMAIN-SUFFIX,whispersystems.org,节点选择
+ - DOMAIN-SUFFIX,wikia.com,节点选择
+ - DOMAIN-SUFFIX,wn.com,节点选择
+ - DOMAIN-SUFFIX,wolframalpha.com,节点选择
+ - DOMAIN-SUFFIX,x-art.com,节点选择
+ - DOMAIN-SUFFIX,yimg.com,节点选择
+ - DOMAIN,api.steampowered.com,节点选择
+ - DOMAIN,store.steampowered.com,节点选择
+ - DOMAIN,bahamut.akamaized.net,动画疯
+ - DOMAIN,gamer-cds.cdn.hinet.net,动画疯
+ - DOMAIN,gamer2-cds.cdn.hinet.net,动画疯
+ - DOMAIN-SUFFIX,bahamut.com.tw,动画疯
+ - DOMAIN-SUFFIX,gamer.com.tw,动画疯
+ - PROCESS-NAME,aria2c,DIRECT
+ - PROCESS-NAME,fdm,DIRECT
+ - PROCESS-NAME,Folx,DIRECT
+ - PROCESS-NAME,NetTransport,DIRECT
+ - PROCESS-NAME,Thunder,DIRECT
+ - PROCESS-NAME,Transmission,DIRECT
+ - PROCESS-NAME,uTorrent,DIRECT
+ - PROCESS-NAME,WebTorrent,DIRECT
+ - PROCESS-NAME,WebTorrent Helper,DIRECT
+ - PROCESS-NAME,DownloadService,DIRECT
+ - PROCESS-NAME,Weiyun,DIRECT
+ - DOMAIN-KEYWORD,aria2,DIRECT
+ - DOMAIN-KEYWORD,xunlei,DIRECT
+ - DOMAIN-KEYWORD,yunpan,DIRECT
+ - DOMAIN-KEYWORD,Thunder,DIRECT
+ - DOMAIN-KEYWORD,XLLiveUD,DIRECT
+ - GEOIP,CN,DIRECT
+ - MATCH,国外网站
