@@ -1,160 +1,184 @@
 # clash-for-linux
-此项目主要是为了解决我们在服务器上下载GitHub等一些国外资源速度慢的问题。
-# 项目介绍
 
-此项目主要是为了解决我们在服务器上下载GitHub等一些国外资源速度慢的问题。
+**Modern Clash proxy client for Linux servers.**  
+Powered by [mihomo](https://github.com/MetaCubeX/mihomo) (Clash Meta) — the next-generation core with TUN support, better performance, and broader protocol compatibility.
 
-<br>
+## Features
 
-# 使用须知
+- **One-command install** — automatically downloads the latest mihomo core, GeoIP/GeoSite databases, and metacubexd dashboard
+- **Systemd integration** — proper service lifecycle management (start/stop/restart/enable)
+- **TUN mode** — system-wide transparent proxy, no manual proxy configuration needed
+- **DNS hijacking** — intercepts DNS queries for better routing
+- **Dashboard** — built-in metacubexd web UI at `http://localhost:9090`
+- **Auto-update** — subscription refresh and core updates via `clash update`
+- **Security hardening** — systemd sandboxing, non-privileged operation
+- **Diagnostics** — `clash doctor` runs comprehensive health checks
 
-- 运行本项目建议使用root用户，或者使用 sudo 提权。
-- 在进行issues提交前，请替换提交内容中是敏感信息（例如：订阅地址）。
-- 本项目是基于[yacd](https://github.com/haishanh/yacd) 进行的配置整合，关于yacd的详细配置请去原项目查看。
-- 请自行准备Clash订阅地址(收费的)。https://sockboom.online/auth/register?affid=556438
-- 运行前请手动更改`.env`文件中的`CLASH_URL`变量值，否则无法正常运行。
-- 当前在RHEL系列和Debian系列Linux系统中测试过，其他系列可能需要适当修改脚本。
-- 支持 x86_64/aarch64 平台
+## Quick Start
 
-<br>
-
-# 使用教程
-
-### 下载项目
-
-下载项目
+### 1. Install
 
 ```bash
-$ git clone https://github.com/wanhebin/clash-for-linux.git
+git clone https://github.com/111wukong/clash-for-linux.git
+cd clash-for-linux/clash-for-linux
+sudo bash install.sh
 ```
 
-进入到项目目录，编辑`.env`文件，修改变量`CLASH_URL`的值。
+The script will:
+- Detect your CPU architecture (x86_64 / arm64 / armv7)
+- Download the latest mihomo release from GitHub
+- Download GeoIP, GeoSite databases and Country.mmdb
+- Download metacubexd dashboard
+- Generate a secure default configuration
+- Install systemd service
+- Install environment profile (`/etc/profile.d/clash.sh`)
+
+### 2. Configure subscription
+
+Edit the config file:
 
 ```bash
-$ cd clash-for-linux-main/clash-for-linux
-$ vim .env
+sudo vim /opt/clash/conf/config.yaml
 ```
 
-<br>
+Add your proxy provider under `proxy-providers:` section. Example:
 
-### 启动程序
+```yaml
+proxy-providers:
+  provider1:
+    type: http
+    url: "YOUR_SUBSCRIPTION_URL"
+    interval: 3600
+    path: ./providers/provider1.yaml
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+```
 
-直接运行脚本文件`start.sh`
-
-- 进入项目目录
+Or set the URL directly:
 
 ```bash
-$ cd clash-for-linux
+echo 'subscription-url: "YOUR_SUBSCRIPTION_URL"' | sudo tee -a /opt/clash/conf/config.yaml
 ```
 
-- 运行启动脚本
+### 3. Start the service
 
 ```bash
-$ sudo bash start.sh
-
-正在检测订阅地址...
-Clash订阅地址可访问！                                      [  OK  ]
-
-正在下载Clash配置文件...
-配置文件config.yaml下载成功！                              [  OK  ]
-
-正在启动Clash服务...
-服务启动成功！                                             [  OK  ]
-
-Clash Dashboard 访问地址：http://IP:9090/ui
-Secret：xxxxxxxxxxxxx
-
-请执行以下命令加载环境变量: source /etc/profile.d/clash.sh
-
-请执行以下命令开启系统代理: proxy_on
-
-若要临时关闭系统代理，请执行: proxy_off
-
+sudo clash start
 ```
+
+### 4. Enable proxy
 
 ```bash
-$ source /etc/profile.d/clash.sh
-$ proxy_on
+source /etc/profile.d/clash.sh
+proxy_on
 ```
 
-- 检查服务端口
+### 5. Verify
 
 ```bash
-$ netstat -tln | grep -E '9090|789.'
-tcp        0      0 127.0.0.1:9090          0.0.0.0:*               LISTEN     
-tcp6       0      0 :::7890                 :::*                    LISTEN     
-tcp6       0      0 :::7891                 :::*                    LISTEN     
-tcp6       0      0 :::7892                 :::*                    LISTEN
+clash status
+curl -I https://www.google.com
 ```
 
-- 检查环境变量
+## Usage
+
+### Management Commands
+
+| Command | Description |
+|---------|-------------|
+| `sudo clash start` | Start the Clash service |
+| `sudo clash stop` | Stop the Clash service |
+| `sudo clash restart` | Restart Clash |
+| `clash status` | Show service status, ports, and secret |
+| `sudo clash update` | Update subscription and restart |
+| `clash logs` | View recent logs |
+| `clash logs -f` | Follow logs in real-time |
+| `clash secret` | Print the dashboard secret |
+| `clash doctor` | Run diagnostics |
+
+### Environment Functions
+
+| Function | Description |
+|----------|-------------|
+| `proxy_on` | Set http_proxy/https_proxy environment variables |
+| `proxy_off` | Unset proxy environment variables |
+| `proxy_status` | Show current proxy state |
+
+## Dashboard
+
+Open your browser to `http://<server-ip>:9090`
+
+- **API Base URL**: `http://<server-ip>:9090`
+- **Secret**: run `clash secret`
+
+## Project Structure
+
+```
+clash-for-linux/
+├── install.sh            # One-click setup script
+├── clash.sh              # Management CLI (symlinked to /usr/local/bin/clash)
+├── .env                  # Subscription URL configuration
+├── conf/
+│   └── config.yaml       # Main configuration file
+└── README.md
+```
+
+**Runtime directories (created by install.sh):**
+
+```
+/opt/clash/
+├── bin/mihomo            # mihomo core binary
+├── conf/
+│   ├── config.yaml       # Main config
+│   ├── geoip.dat         # GeoIP database
+│   ├── geosite.dat       # GeoSite database
+│   └── Country.mmdb      # MMDB for geoip
+├── dashboard/            # metacubexd web UI
+└── logs/clash.log        # Service logs
+```
+
+## Requirements
+
+- Linux (RHEL/Debian/Arch)
+- root/sudo access
+- curl, wget, tar, systemctl
+- Python 3 (optional, for smart subscription merging)
+
+## Uninstall
 
 ```bash
-$ env | grep -E 'http_proxy|https_proxy'
-http_proxy=http://127.0.0.1:7890
-https_proxy=http://127.0.0.1:7890
+sudo systemctl stop clash
+sudo systemctl disable clash
+sudo rm -f /etc/systemd/system/clash.service
+sudo rm -rf /opt/clash
+sudo rm -f /etc/profile.d/clash.sh
+sudo rm -f /usr/local/bin/clash
 ```
 
-以上步鄹如果正常，说明服务clash程序启动成功，现在就可以体验高速下载github资源了。
+## Migrating from v1
 
-<br>
+If you were using the old version with `start.sh` / `shutdown.sh`:
 
-### 重启程序
+1. Back up your old config: `cp /path/to/old/clash/conf/config.yaml ~/backup.yaml`
+2. Run the new install script
+3. Apply your subscription settings
 
-如果需要对Clash配置进行修改，请修改 `conf/config.yaml` 文件。然后运行 `restart.sh` 脚本进行重启。
+## Troubleshooting
 
-> **注意：**
-> 重启脚本 `restart.sh` 不会更新订阅信息。
+- **"Failed to start"**: Run `clash doctor` to check all components
+- **Port conflicts**: Edit `/opt/clash/conf/config.yaml` and change port numbers
+- **TUN errors**: Ensure the kernel module is loaded: `sudo modprobe tun`
+- **DNS not working**: Check firewall rules for port 53
 
-<br>
+## Security Notes
 
-### 停止程序
+- The service runs under systemd sandboxing with limited capabilities
+- Only `CAP_NET_ADMIN`, `CAP_NET_RAW`, `CAP_NET_BIND_SERVICE` are granted
+- Private /tmp and /home are enforced
+- Dashboard should be firewalled in production environments
 
-- 进入项目目录
+## License
 
-```bash
-$ cd clash-for-linux
-```
-
-- 关闭服务
-
-```bash
-$ sudo sh shutdown.sh
-
-服务关闭成功，请执行以下命令关闭系统代理：proxy_off
-
-```
-
-```bash
-$ proxy_off
-```
-
-然后检查程序端口、进程以及环境变量`http_proxy|https_proxy`，若都没则说明服务正常关闭。
-
-
-<br>
-
-### Clash Dashboard
-
-- 访问 Clash Dashboard
-
-通过浏览器访问 `start.sh` 执行成功后输出的地址，例如：http://192.168.0.1:9090/ui
-
-- 登录管理界面
-
-在`API Base URL`一栏中输入：http://IP:9090 ，在`Secret(optional)`一栏中输入启动成功后输出的Secret。
-
-点击Add并选择刚刚输入的管理界面地址，之后便可在浏览器上进行一些配置。
-
-- 更多教程
-
-此 Clash Dashboard 使用的是[yacd](https://github.com/haishanh/yacd)项目，详细使用方法请移步到yacd上查询。
-
-
-<br>
-
-# 常见问题
-
-1.部分Ubuntu系统默认的 shell `/bin/sh` 被更改为 `dash`，运行脚本会出现报错（报错内容一般会有 `-en [ OK ]`）。建议使用 `bash xxx.sh` 运行脚本。
-
-
+MIT
