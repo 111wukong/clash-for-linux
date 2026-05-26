@@ -1,0 +1,31 @@
+# ============================================================================
+# clash-for-linux — Docker Compose
+# ============================================================================
+
+version: "3.9"
+
+services:
+  clash:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: clash
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - NET_BIND_SERVICE
+    environment:
+      - TZ=${TZ:-Asia/Shanghai}
+    volumes:
+      - ./config.yaml:/etc/clash/config.yaml:ro
+      - clash-logs:/opt/clash/logs
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  clash-logs:

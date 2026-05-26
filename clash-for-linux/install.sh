@@ -1,371 +1,179 @@
 #!/usr/bin/env bash
 # ============================================================================
-# clash-for-linux — Setup script
-# Downloads the latest mihomo core, configures systemd service, sets up TUN.
+# clash-for-linux v2 — One-step installer
 # ============================================================================
 set -euo pipefail
 
-RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
-info()  { echo -e "${GREEN}[INFO]${NC}  $*"; }
-warn()  { echo -e "${YELLOW}[WARN]${NC}  $*"; }
-error() { echo -e "${RED}[ERROR]${NC} $*"; exit 1; }
-
-# --- Paths ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-INSTALL_DIR="/opt/clash"
-BIN_DIR="${INSTALL_DIR}/bin"
-CONF_DIR="${INSTALL_DIR}/conf"
-LOG_DIR="${INSTALL_DIR}/logs"
-DASHBOARD_DIR="${INSTALL_DIR}/dashboard"
+LIB_DIR="${SCRIPT_DIR}/lib"
 
-# --- Detect architecture ---
-detect_arch() {
-    local arch
-    arch=$(uname -m)
-    case "$arch" in
-        x86_64|amd64)  echo "amd64" ;;
-        aarch64|arm64) echo "arm64"  ;;
-        armv7l|armhf)  echo "armv7"  ;;
-        *) error "Unsupported architecture: $arch. Only x86_64, arm64, armv7 are supported." ;;
-    esac
-}
+source "${LIB_DIR}/common.sh"
+source "${LIB_DIR}/config-gen.sh"
+source "${LIB_DIR}/install-core.sh"
+source "${LIB_DIR}/install-dashboard.sh"
+source "${LIB_DIR}/install-geo.sh"
+source "${LIB_DIR}/install-service.sh"
+source "${LIB_DIR}/subscription.sh"
 
-# --- Pre-flight checks ---
+# ============================================================================
+# Pre-flight
+# ============================================================================
+
 preflight() {
-    if [[ $EUID -ne 0 ]]; then
-        error "This script must be run as root (or with sudo)."
-    fi
+  if [[ ${EUID:-0} -ne 0 ]]; then
+    error "This script must be run as root. Use: sudo bash install.sh"
+  fi
 
-    local missing=()
-    for cmd in curl wget tar gzip systemctl; do
-        command -v "$cmd" &>/dev/null || missing+=("$cmd")
-    done
-    if [[ ${#missing[@]} -gt 0 ]]; then
-        error "Missing required commands: ${missing[*]}. Install them first."
-    fi
+  local missing=()
+  for cmd in curl tar gzip systemctl openssl; do
+    command -v "$cmd" &>/dev/null || missing+=("$cmd")
+  done
+  if [[ ${#missing[@]} -gt 0 ]]; then
+    echo ""
+    warn "Missing dependencies: ${missing[*]}"
+    local distro
+    distro=$(detect_distro)
+    case "$distro" in
+      ubuntu|debian)
+        echo "  Install with: apt install ${missing[*]}" ;;
+      centos|rhel|fedora)
+        echo "  Install with: yum install ${missing[*]}" ;;
+      arch|manjaro)
+        echo "  Install with: pacman -S ${missing[*]}" ;;
+      *)
+        echo "  Please install them manually." ;;
+    esac
+    exit 1
+  fi
 }
 
-# --- Download latest mihomo ---
-download_core() {
-    local arch="$1"
-    local release_url
+prompt_sub_url() {
+  echo ""
+  echo -e "${CYAN}Do you have a subscription URL?${NC}"
+  echo "  (Leave blank to skip — you can set it later with: sudo clash sub set URL)"
+  echo ""
+  read -r -p "  Subscription URL: " sub_url
 
-    info "Detecting latest mihomo version..."
-    release_url=$(curl -sL "https://api.github.com/repos/MetaCubeX/mihomo/releases/latest" \
-        | grep "browser_download_url" \
-        | grep "mihomo-linux-${arch}" \
-        | grep -v "\.pdb\." \
-        | head -1 \
-        | cut -d'"' -f4)
-
-    if [[ -z "$release_url" ]]; then
-        error "Failed to find mihomo release for ${arch}. Check: https://github.com/MetaCubeX/mihomo/releases"
-    fi
-
-    local filename
-    filename=$(basename "$release_url")
-    info "Downloading: $filename"
-    curl -sL "$release_url" -o "/tmp/${filename}"
-
-    mkdir -p "$BIN_DIR"
-    info "Extracting..."
-    tar -xzf "/tmp/${filename}" -C "$BIN_DIR/" --strip-components=1 2>/dev/null || \
-        tar -xzf "/tmp/${filename}" -C "$BIN_DIR/" 2>/dev/null || \
-        cp "/tmp/${filename}" "${BIN_DIR}/mihomo" 2>/dev/null
-
-    if [[ -f "${BIN_DIR}/mihomo" ]]; then
-        chmod +x "${BIN_DIR}/mihomo"
-        "${BIN_DIR}/mihomo" -v 2>&1 | head -1
-        info "Core installed at ${BIN_DIR}/mihomo"
-    else
-        # Try to find the binary
-        local found
-        found=$(find "$BIN_DIR" -type f -executable -name "mihomo*" 2>/dev/null | head -1)
-        if [[ -n "$found" ]]; then
-            mv "$found" "${BIN_DIR}/mihomo"
-            chmod +x "${BIN_DIR}/mihomo"
-            "${BIN_DIR}/mihomo" -v 2>&1 | head -1
-        else
-            error "Failed to locate mihomo binary after extraction."
-        fi
-    fi
-    rm -f "/tmp/${filename}"
+  if [[ -n "$sub_url" ]]; then
+    echo "$sub_url" > "${INSTALL_DIR}/.env"
+    echo "CLASH_URL=\"${sub_url}\"" > "${INSTALL_DIR}/.env"
+    info "Subscription URL saved."
+  fi
 }
 
-# --- Download GeoIP / GeoSite databases ---
-download_resources() {
-    info "Downloading GeoIP database..."
-    curl -sL "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat" \
-        -o "${CONF_DIR}/geoip.dat" 2>/dev/null || true
+prompt_mode() {
+  echo ""
+  echo -e "${CYAN}Select proxy mode:${NC}"
+  echo "  1) tun       — TUN transparent proxy (recommended, best compatibility)"
+  echo "  2) fake-ip   — Fake-IP DNS enhancing (lightweight, no VPN/TUN)"
+  echo "  3) redirect  — iptables redirect (legacy, requires iptables)"
+  echo ""
+  read -r -p "  Choice [1-3] (default: 1): " choice
 
-    info "Downloading GeoSite database..."
-    curl -sL "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat" \
-        -o "${CONF_DIR}/geosite.dat" 2>/dev/null || true
-
-    info "Downloading Country.mmdb..."
-    curl -sL "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country.mmdb" \
-        -o "${CONF_DIR}/Country.mmdb" 2>/dev/null || true
+  case "${choice:-1}" in
+    1) MODE="tun" ;;
+    2) MODE="fake-ip" ;;
+    3) MODE="redirect" ;;
+    *) MODE="tun" ;;
+  esac
+  info "Mode: $MODE"
 }
 
-# --- Download dashboard (metacubexd) ---
-download_dashboard() {
-    info "Downloading metacubexd dashboard..."
-    local dash_url
-    dash_url=$(curl -sL "https://api.github.com/repos/MetaCubeX/metacubexd/releases/latest" \
-        | grep "browser_download_url" \
-        | grep -i "dist\.tgz" \
-        | head -1 \
-        | cut -d'"' -f4)
-
-    if [[ -n "$dash_url" ]]; then
-        curl -sL "$dash_url" -o "/tmp/metacubexd.tgz"
-        rm -rf "$DASHBOARD_DIR"
-        mkdir -p "$DASHBOARD_DIR"
-        tar -xzf "/tmp/metacubexd.tgz" -C "$DASHBOARD_DIR" 2>/dev/null
-        rm -f "/tmp/metacubexd.tgz"
-        info "Dashboard installed."
-    else
-        warn "Failed to download dashboard. Will use built-in."
-    fi
-}
-
-# --- Generate default config ---
-generate_config() {
-    local secret
-    secret=$(openssl rand -hex 16 2>/dev/null || echo "clash-secret")
-
-    cat > "${CONF_DIR}/config.yaml" << 'CONFIGEOF'
 # ============================================================================
-# mihomo (Clash Meta) configuration — generated by clash-for-linux
+# Main
 # ============================================================================
 
-# HTTP/SOCKS proxy ports
-port: 7890
-socks-port: 7891
-
-# Linux firewall redirect (transparent proxy)
-redir-port: 7892
-tproxy-port: 7893
-
-# RESTful API
-external-controller: 0.0.0.0:9090
-secret: "CONFIGEOF
-    echo "${secret}" >> "${CONF_DIR}/config.yaml"
-
-    cat >> "${CONF_DIR}/config.yaml" << 'CONFIGEOF'
-
-# External UI (dashboard)
-external-ui: /opt/clash/dashboard
-
-# Allow LAN connections
-allow-lan: true
-bind-address: "0.0.0.0"
-
-# Logging
-log-level: info
-
-# ============================================================================
-# TUN mode — system-wide transparent proxy
-# ============================================================================
-tun:
-  enable: true
-  stack: system
-  dns-hijack:
-    - "any:53"
-  auto-route: true
-  auto-detect-interface: true
-
-# ============================================================================
-# DNS
-# ============================================================================
-dns:
-  enable: true
-  listen: 0.0.0.0:53
-  ipv6: false
-  default-nameserver:
-    - 223.5.5.5
-    - 114.114.114.114
-  nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-  fallback:
-    - https://1.1.1.1/dns-query
-    - https://dns.google/dns-query
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-
-# ============================================================================
-# Profile (subscription placeholder)
-# ============================================================================
-# Uncomment and set your subscription URL below. Then run:
-#   sudo clash update
-#
-# proxy-providers:
-#   provider1:
-#     type: http
-#     url: "YOUR_SUBSCRIPTION_URL"
-#     interval: 3600
-#     path: ./providers/provider1.yaml
-#     health-check:
-#       enable: true
-#       url: http://www.gstatic.com/generate_204
-#       interval: 300
-#
-# proxy-groups:
-#   - name: Proxy
-#     type: select
-#     proxies:
-#       - provider1
-#       - DIRECT
-
-# ============================================================================
-# Rules (fallback — use your own subscription config for best results)
-# ============================================================================
-rules:
-  - GEOSITE,category-ads-all,REJECT
-  - GEOSITE,private,DIRECT
-  - GEOSITE,microsoft@cn,DIRECT
-  - GEOSITE,apple-cn,DIRECT
-  - GEOSITE,google-cn,DIRECT
-  - GEOSITE,category-games@cn,DIRECT
-  - GEOSITE,cn,DIRECT
-  - GEOIP,CN,DIRECT
-  - MATCH,Proxy
-CONFIGEOF
-
-    echo "${secret}"
-}
-
-# --- Create systemd service ---
-install_service() {
-    cat > /etc/systemd/system/clash.service << 'SERVICEEOF'
-[Unit]
-Description=Clash (mihomo) — VPN/proxy client
-Documentation=https://wiki.metacubex.one
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-Type=simple
-ExecStart=/opt/clash/bin/mihomo -d /opt/clash/conf
-Restart=on-failure
-RestartSec=5
-LimitNOFILE=1000000
-LimitNPROC=500
-
-# Security hardening
-NoNewPrivileges=true
-ProtectSystem=full
-ProtectHome=true
-PrivateDevices=true
-PrivateTmp=true
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE
-
-[Install]
-WantedBy=multi-user.target
-SERVICEEOF
-
-    systemctl daemon-reload
-    info "Systemd service installed: clash"
-}
-
-# --- Create environment profile ---
-install_profile() {
-    cat > /etc/profile.d/clash.sh << 'PROFILEEOF'
-# clash-for-linux — proxy toggle functions
-# Source: source /etc/profile.d/clash.sh
-
-proxy_on() {
-    export http_proxy="http://127.0.0.1:7890"
-    export https_proxy="http://127.0.0.1:7890"
-    export no_proxy="127.0.0.1,localhost,local,.local,.localdomain"
-    echo -e "\033[32m[✓] Proxy enabled\033[0m"
-}
-
-proxy_off() {
-    unset http_proxy
-    unset https_proxy
-    unset no_proxy
-    echo -e "\033[31m[✗] Proxy disabled\033[0m"
-}
-
-proxy_status() {
-    if systemctl is-active --quiet clash 2>/dev/null; then
-        echo -e "\033[32mClash: active\033[0m"
-        if [[ -n "${http_proxy:-}" ]]; then
-            echo "http_proxy=${http_proxy}"
-        else
-            echo "http_proxy: (not set, run proxy_on)"
-        fi
-    else
-        echo -e "\033[31mClash: inactive\033[0m"
-    fi
-}
-PROFILEEOF
-
-    chmod +x /etc/profile.d/clash.sh
-    info "Profile installed: source /etc/profile.d/clash.sh"
-}
-
-# --- Main ---
 main() {
-    echo ""
-    echo "╔══════════════════════════════════════════╗"
-    echo "║    clash-for-linux — Setup Script        ║"
-    echo "╚══════════════════════════════════════════╝"
-    echo ""
+  echo ""
+  echo -e "${BOLD}╔══════════════════════════════════════════════════╗${NC}"
+  echo -e "${BOLD}║        clash-for-linux v2 — Installer            ║${NC}"
+  echo -e "${BOLD}╚══════════════════════════════════════════════════╝${NC}"
+  echo ""
 
-    preflight
+  preflight
 
-    local arch
-    arch=$(detect_arch)
-    info "Architecture: ${arch}"
+  local arch
+  arch=$(detect_arch)
+  info "Architecture: ${arch} ($(uname -m))"
+  info "Distro:       $(detect_distro)"
 
-    # Create directories
-    mkdir -p "$BIN_DIR" "$CONF_DIR" "$LOG_DIR" "$DASHBOARD_DIR"
+  # Interactive prompts
+  prompt_mode
+  prompt_sub_url
 
-    # Download components
-    download_core "$arch"
-    download_resources
-    download_dashboard
+  # Create directories
+  step "Creating directories..."
+  mkdir -p "$BIN_DIR" "$CONF_DIR" "$LOG_DIR" "$DASHBOARD_DIR" "$BACKUP_DIR" "$RULES_DIR" "$PROVIDERS_DIR"
+  ok "Directory structure created"
 
-    # Generate config
-    local secret
-    secret=$(generate_config)
+  # Install components
+  install_core "$arch"
+  install_dashboard
+  install_geodata
+  install_rule_providers
 
-    # Install service and profile
-    install_service
-    install_profile
+  # Generate config
+  step "Generating config (mode: $MODE)..."
+  local secret
+  secret=$(generate_config "" "$MODE")
+  ok "Config generated"
 
-    # Create symlinks for convenience
-    ln -sf "${SCRIPT_DIR}/clash.sh" /usr/local/bin/clash 2>/dev/null || true
+  # Install service and profile
+  install_service
+  install_update_timer
+  install_profile
 
-    echo ""
-    echo "╔══════════════════════════════════════════╗"
-    echo "║    Installation Complete!                ║"
-    echo "╚══════════════════════════════════════════╝"
-    echo ""
-    echo "  Commands:"
-    echo "    sudo clash start       Start the service"
-    echo "    sudo clash stop        Stop the service"
-    echo "    sudo clash restart     Restart the service"
-    echo "    sudo clash status      Show status"
-    echo "    sudo clash update      Update core + subscription"
-    echo "    sudo clash logs        View logs"
-    echo ""
-    echo "  Before using, set your subscription in:"
-    echo "    ${CONF_DIR}/config.yaml"
-    echo "  Then run: sudo clash update"
-    echo ""
-    echo "  Environment (after source /etc/profile.d/clash.sh):"
-    echo "    proxy_on        Enable system proxy"
-    echo "    proxy_off       Disable system proxy"
-    echo "    proxy_status    Show proxy status"
-    echo ""
-    echo "  Dashboard: http://localhost:9090"
-    echo "  Secret:    ${secret}"
-    echo ""
+  # Install CLI symlink
+  cp "${SCRIPT_DIR}/clash" "$CLI_PATH" 2>/dev/null || \
+    ln -sf "${SCRIPT_DIR}/clash" "$CLI_PATH" 2>/dev/null || true
+  chmod +x "$CLI_PATH" 2>/dev/null || true
+  ok "CLI installed: ${CLI_PATH}"
+
+  # Update subscription if provided
+  local sub_url
+  sub_url=$(get_subscription_url 2>/dev/null || true)
+  if [[ -n "$sub_url" ]]; then
+    subscription_update "$sub_url"
+  fi
+
+  # Start service
+  step "Starting service..."
+  systemctl enable "$SERVICE_NAME" &>/dev/null || true
+  systemctl start "$SERVICE_NAME" 2>/dev/null || true
+
+  if systemctl is-active --quiet "$SERVICE_NAME" 2>/dev/null; then
+    ok "Service started successfully"
+  else
+    warn "Service failed to start. Check: sudo clash logs"
+  fi
+
+  # Done
+  echo ""
+  echo -e "${BOLD}╔══════════════════════════════════════════════════╗${NC}"
+  echo -e "${BOLD}║         Installation Complete!                   ║${NC}"
+  echo -e "${BOLD}╚══════════════════════════════════════════════════╝${NC}"
+  echo ""
+  echo -e "${GREEN}Quick Start:${NC}"
+  echo ""
+  echo "  source /etc/profile.d/clash.sh   # Load proxy functions"
+  echo "  proxy_on                          # Enable proxy"
+  echo "  proxy_test                        # Test connectivity"
+  echo ""
+  echo -e "${GREEN}Management:${NC}"
+  echo ""
+  echo "  sudo clash status          Service status & ports"
+  echo "  sudo clash doctor          Full diagnostic"
+  echo "  sudo clash update          Update subscription"
+  echo "  sudo clash logs -f         Follow logs"
+  echo ""
+  echo -e "${GREEN}Dashboard:${NC}"
+  echo ""
+  echo "  URL:    http://localhost:9090"
+  echo "  Secret: ${secret}"
+  echo ""
+  echo "  Mode:   ${MODE}"
+  echo "  Config: ${CONF_DIR}/config.yaml"
+  echo ""
 }
 
 main "$@"

@@ -1,0 +1,508 @@
+#!/usr/bin/env bash
+# ============================================================================
+# clash — Management CLI for clash-for-linux v2
+# ============================================================================
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LIB_DIR="${SCRIPT_DIR}/lib"
+
+# Source library modules
+source "${LIB_DIR}/common.sh"
+
+for mod in config-gen subscription install-core install-dashboard install-geo install-service doctor network; do
+  [[ -f "${LIB_DIR}/${mod}.sh" ]] && source "${LIB_DIR}/${mod}.sh"
+done
+
+# ============================================================================
+# Command implementations
+# ============================================================================
+
+cmd_start() {
+  require_root
+  systemctl start "$SERVICE_NAME"
+  systemctl enable "$SERVICE_NAME" &>/dev/null || true
+  info "Clash started."
+}
+
+cmd_stop() {
+  require_root
+  systemctl stop "$SERVICE_NAME"
+  info "Clash stopped."
+}
+
+cmd_restart() {
+  require_root
+  systemctl restart "$SERVICE_NAME"
+  info "Clash restarted."
+}
+
+cmd_reload() {
+  require_root
+  if systemctl is-active --quiet "$SERVICE_NAME" 2>/dev/null; then
+    systemctl reload "$SERVICE_NAME" 2>/dev/null || systemctl restart "$SERVICE_NAME"
+    info "Config reloaded."
+  else
+    warn "Service is not running. Start it first."
+  fi
+}
+
+cmd_status() {
+  echo ""
+  echo -e "${BOLD}═══ Clash Status ═══${NC}"
+  echo ""
+
+  if systemctl is-active --quiet "$SERVICE_NAME" 2>/dev/null; then
+    echo -e "  Service:  ${GREEN}● running${NC}"
+  else
+    echo -e "  Service:  ${RED}● stopped${NC}"
+  fi
+  echo "  Enabled:  $(systemctl is-enabled "$SERVICE_NAME" 2>/dev/null || echo 'unknown')"
+  echo ""
+
+  echo -e "${BOLD}── Ports${NC}"
+  local ports=(7890 7891 7892 7893 9090)
+  local labels=("mixed (HTTP+SOCKS)" "socks" "redir" "tproxy" "API (dashboard)")
+  for i in "${!ports[@]}"; do
+    local port="${ports[$i]}" label="${labels[$i]}"
+    if port_listening "$port"; then
+      echo -e "  ${GREEN}✓${NC} :${port}  ${label}"
+    else
+      echo -e "  ${YELLOW}✗${NC} :${port}  ${label}"
+    fi
+  done
+
+  echo ""
+  echo -e "${BOLD}── Access${NC}"
+  echo "  Dashboard: http://localhost:9090"
+  local secret
+  secret=$(grep -oP 'secret:\s*"?\K[^"\n]+' "${CONF_DIR}/config.yaml" 2>/dev/null | head -1 | tr -d "'" || echo "N/A")
+  echo "  Secret:    $secret"
+
+  # Proxy env status
+  echo ""
+  echo -e "${BOLD}── Proxy ENV${NC}"
+  if [[ -n "${http_proxy:-}" ]]; then
+    echo -e "  ${GREEN}✓${NC} http_proxy=${http_proxy}"
+  else
+    echo -e "  ${YELLOW}✗${NC} Not set (run: proxy_on)"
+  fi
+
+  # Subscription info
+  local sub_url
+  sub_url=$(get_subscription_url 2>/dev/null || true)
+  if [[ -n "$sub_url" ]]; then
+    echo ""
+    echo -e "${BOLD}── Subscription${NC}"
+    echo "  URL:  ${sub_url:0:70}..."
+    # Check last update time
+    if [[ -f "${CONF_DIR}/config.yaml" ]]; then
+      local mtime
+      mtime=$(stat -c%y "${CONF_DIR}/config.yaml" 2>/dev/null | cut -d. -f1 || echo "unknown")
+      echo "  Last: $mtime"
+    fi
+  fi
+
+  echo ""
+}
+
+cmd_update() {
+  require_root
+
+  # If URL passed as argument, use it
+  local url="${1:-}"
+  if [[ -n "$url" ]]; then
+    if [[ "$url" != http* ]]; then
+      warn "Invalid URL. Treating as sub-command."
+      case "$url" in
+        core)  update_core; return ;;
+        geo)   update_geodata; return ;;
+        *)     error "Unknown sub-command: $url" ;;
+      esac
+    fi
+  else
+    url=$(get_subscription_url)
+  fi
+
+  if [[ -z "$url" ]]; then
+    warn "No subscription URL configured."
+    echo ""
+    echo "  Set it with:   sudo clash sub set YOUR_URL"
+    echo "  Or pass URL:   sudo clash update https://your-sub.com/..."
+    echo ""
+    echo "  Other updates:"
+    echo "    sudo clash update core     Update only the core binary"
+    echo "    sudo clash update geo      Update only Geo databases"
+    exit 1
+  fi
+
+  echo ""
+  echo -e "${BOLD}═══ Updating Clash ═══${NC}"
+  echo ""
+  subscription_update "$url"
+  update_geodata
+
+  # Restart if running
+  if systemctl is-active --quiet "$SERVICE_NAME" 2>/dev/null; then
+    service_restart
+    info "Update complete. Service restarted."
+  else
+    info "Update complete. (service not running)"
+  fi
+  echo ""
+}
+
+cmd_upgrade() {
+  require_root
+  local quiet="${1:-}"
+
+  echo ""
+  echo -e "${BOLD}═══ Full Upgrade ═══${NC}"
+  echo ""
+
+  # 1. Update core
+  update_core
+
+  # 2. Update Geo databases
+  update_geodata
+
+  # 3. Update subscription (if available)
+  local sub_url
+  sub_url=$(get_subscription_url 2>/dev/null || true)
+  if [[ -n "$sub_url" ]]; then
+    subscription_update "$sub_url"
+  else
+    info "No subscription to update."
+  fi
+
+  # 4. Restart
+  if systemctl is-active --quiet "$SERVICE_NAME" 2>/dev/null; then
+    service_restart
+    info "Upgrade complete. Service restarted."
+  else
+    info "Upgrade complete. Start service with: sudo clash start"
+  fi
+
+  echo ""
+}
+
+cmd_logs() {
+  if [[ "${1:-}" == "-f" ]] || [[ "${1:-}" == "--follow" ]]; then
+    shift
+    if [[ -f "${LOG_DIR}/clash.log" ]]; then
+      tail -f "${LOG_DIR}/clash.log"
+    else
+      journalctl -fu "$SERVICE_NAME"
+    fi
+  else
+    if [[ -f "${LOG_DIR}/clash.log" ]]; then
+      tail -n "${1:-50}" "${LOG_DIR}/clash.log"
+    else
+      journalctl -u "$SERVICE_NAME" --no-pager -n "${1:-50}"
+    fi
+  fi
+}
+
+cmd_secret() {
+  local secret
+  secret=$(grep -oP 'secret:\s*"?\K[^"\n]+' "${CONF_DIR}/config.yaml" 2>/dev/null | head -1 | tr -d "'" || echo "")
+  if [[ -z "$secret" ]]; then
+    error "Secret not found in config."
+  fi
+  echo "$secret"
+}
+
+cmd_config() {
+  local sub="${1:-show}"
+
+  case "$sub" in
+    show|cat)
+      if [[ -f "${CONF_DIR}/config.yaml" ]]; then
+        cat "${CONF_DIR}/config.yaml"
+      else
+        error "Config not found. Run installation first."
+      fi
+      ;;
+    edit)
+      require_root
+      local editor="${EDITOR:-vim}"
+      if command -v "$editor" &>/dev/null; then
+        "$editor" "${CONF_DIR}/config.yaml"
+        info "Config edited. Reload with: sudo clash reload"
+      else
+        error "Editor '$editor' not found. Set \$EDITOR or use vim/nano."
+      fi
+      ;;
+    validate)
+      if [[ -f "${CONF_DIR}/config.yaml" ]]; then
+        if verify_yaml "${CONF_DIR}/config.yaml"; then
+          info "Config is valid."
+        else
+          error "Config has YAML syntax errors."
+        fi
+      else
+        error "Config file not found."
+      fi
+      ;;
+    reload)
+      cmd_reload
+      ;;
+    backup)
+      backup_config
+      ;;
+    restore)
+      restore_config "${2:-}"
+      ;;
+    *)
+      echo "Usage: clash config {show|edit|validate|backup|restore|reload}"
+      ;;
+  esac
+}
+
+cmd_sub() {
+  local action="${1:-}"
+
+  case "$action" in
+    set)
+      local url="${2:-}"
+      if [[ -z "$url" ]]; then
+        error "Usage: clash sub set URL"
+      fi
+      subscription_set "$url"
+      info "Run 'sudo clash update' to apply."
+      ;;
+    get|show)
+      local url
+      url=$(get_subscription_url)
+      if [[ -n "$url" ]]; then
+        echo "$url"
+      else
+        warn "No subscription URL set."
+        echo "  Set: sudo clash sub set YOUR_URL"
+      fi
+      ;;
+    test)
+      local url
+      url=$(get_subscription_url)
+      if [[ -z "$url" ]]; then
+        error "No subscription URL set."
+      fi
+      info "Testing subscription..."
+      local code
+      code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$url" 2>/dev/null)
+      if [[ "$code" == "200" ]]; then
+        info "Subscription reachable (HTTP 200)"
+      else
+        warn "Subscription returned HTTP ${code}"
+      fi
+      ;;
+    *)
+      echo "Usage: clash sub {set|get|test}"
+      echo ""
+      echo "  set URL    Set subscription URL"
+      echo "  get        Show current subscription URL"
+      echo "  test       Test subscription connectivity"
+      ;;
+  esac
+}
+
+cmd_timer() {
+  require_root
+  local action="${1:-}"
+
+  case "$action" in
+    enable)
+      systemctl enable "$TIMER_NAME" --now &>/dev/null
+      info "Auto-update timer enabled (daily at ~04:00)."
+      ;;
+    disable)
+      systemctl disable "$TIMER_NAME" --now &>/dev/null || true
+      info "Auto-update timer disabled."
+      ;;
+    status)
+      if systemctl is-active --quiet "$TIMER_NAME" 2>/dev/null; then
+        echo -e "${GREEN}active${NC}"
+        systemctl status "$TIMER_NAME" --no-pager 2>/dev/null || true
+      else
+        echo -e "${YELLOW}inactive${NC}"
+      fi
+      ;;
+    *)
+      echo "Usage: clash timer {enable|disable|status}"
+      ;;
+  esac
+}
+
+cmd_doctor() {
+  run_doctor
+}
+
+cmd_metrics() {
+  show_metrics
+}
+
+cmd_switch_config() {
+  require_root
+  local mode="${1:-}"
+
+  case "$mode" in
+    tun)        generate_config "" "tun" ;;
+    fake-ip)    generate_config "" "fake-ip" ;;
+    redirect)   generate_config "" "redirect" ;;
+    *)
+      echo "Usage: clash switch {tun|fake-ip|redirect}"
+      echo ""
+      echo "  tun        TUN mode (system transparent proxy, recommended)"
+      echo "  fake-ip    Fake-IP mode (lightweight DNS enhancing)"
+      echo "  redirect   Redirect mode (iptables-based)"
+      exit 1
+      ;;
+  esac
+
+  if systemctl is-active --quiet "$SERVICE_NAME" 2>/dev/null; then
+    service_restart
+    info "Switched to ${mode} mode. Service restarted."
+  else
+    warn "Mode changed. Start service with: sudo clash start"
+  fi
+}
+
+cmd_doctor_fix() {
+  require_root
+  step "Running auto-fix..."
+
+  local fixed=0
+
+  # Fix: missing binary
+  if [[ ! -x "${BIN_DIR}/mihomo" ]]; then
+    info "Installing mihomo core..."
+    install_core "$(detect_arch)"
+    ((fixed++))
+  fi
+
+  # Fix: missing config
+  if [[ ! -f "${CONF_DIR}/config.yaml" ]]; then
+    info "Generating default config..."
+    generate_config "" "tun" > /dev/null
+    ((fixed++))
+  fi
+
+  # Fix: missing geo databases
+  for db in geoip.dat geosite.dat Country.mmdb; do
+    if [[ ! -f "${CONF_DIR}/${db}" ]]; then
+      info "Downloading ${db}..."
+      install_geodata
+      break
+    fi
+  done
+
+  # Fix: service not enabled
+  if ! systemctl is-enabled --quiet "$SERVICE_NAME" 2>/dev/null; then
+    if [[ -f "/etc/systemd/system/${SERVICE_NAME}" ]]; then
+      systemctl enable "$SERVICE_NAME" &>/dev/null
+      info "Enabled auto-start."
+      ((fixed++))
+    fi
+  fi
+
+  if (( fixed > 0 )); then
+    info "Fixed ${fixed} issue(s)."
+  else
+    info "No issues to fix."
+  fi
+}
+
+# ============================================================================
+# Main
+# ============================================================================
+
+print_help() {
+  cat << 'EOF'
+
+╔══════════════════════════════════════════════════════╗
+║           clash-for-linux  v2.0                      ║
+║     Modern Clash Meta proxy management               ║
+╚══════════════════════════════════════════════════════╝
+
+Usage: clash <command> [options]
+
+── Service Management ──────────────────────────────────
+  start              Start the Clash service
+  stop               Stop the Clash service
+  restart            Restart the Clash service
+  reload             Reload config without restarting
+  status             Show detailed status and port info
+
+── Updates ─────────────────────────────────────────────
+  update [URL]       Update subscription and Geo databases
+  update core        Update core binary only
+  update geo         Update Geo databases only
+  upgrade            Full upgrade (core + geo + sub)
+
+── Subscription ─────────────────────────────────────────
+  sub set URL        Configure subscription URL
+  sub get            Show current subscription URL
+  sub test           Test subscription connectivity
+
+── Configuration ────────────────────────────────────────
+  config show        Display current config
+  config edit        Edit config with $EDITOR
+  config validate    Validate YAML syntax
+  config backup      Backup current config
+  config restore     List/restore backups
+  switch MODE        Switch proxy mode (tun/fake-ip/redirect)
+
+── Diagnostics ──────────────────────────────────────────
+  doctor             Run full system diagnostic
+  doctor --fix       Auto-fix common issues
+  metrics            Show traffic & connection stats
+  logs [N]           Show recent logs (default 50)
+  logs -f            Follow logs in real-time
+  secret             Print API secret
+
+── Utilities ────────────────────────────────────────────
+  timer enable       Enable daily auto-update (04:00)
+  timer disable      Disable auto-update timer
+  timer status       Show timer status
+
+── Environment (after 'source /etc/profile.d/clash.sh') ─
+  proxy_on           Enable system proxy
+  proxy_off          Disable system proxy
+  proxy_status       Show proxy state
+  proxy_test         Test proxy connectivity
+
+EOF
+}
+
+main() {
+  local cmd="${1:-help}"
+  shift 2>/dev/null || true
+
+  case "$cmd" in
+    start)           cmd_start ;;
+    stop)            cmd_stop ;;
+    restart)         cmd_restart ;;
+    reload)          cmd_reload ;;
+    status)          cmd_status ;;
+    update)          cmd_update "$@" ;;
+    upgrade)         cmd_upgrade "$@" ;;
+    sub|subscription) cmd_sub "$@" ;;
+    config)          cmd_config "$@" ;;
+    switch)          cmd_switch_config "$@" ;;
+    doctor)          [[ "${1:-}" == "--fix" ]] && { cmd_doctor_fix; } || cmd_doctor ;;
+    metrics)         cmd_metrics ;;
+    logs)            cmd_logs "$@" ;;
+    secret)          cmd_secret ;;
+    timer)           cmd_timer "$@" ;;
+    backup)          [[ "${1:-}" == "restore" ]] && { restore_config "${2:-}"; } || backup_config ;;
+    help|--help|-h|"")
+      print_help ;;
+    *)
+      echo -e "${RED}Unknown command:${NC} $cmd"
+      echo "Run: clash help"
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"
